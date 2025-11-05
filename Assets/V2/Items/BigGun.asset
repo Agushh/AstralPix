@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 756693b7b26f31f4390fd39c21d0a103, type: 3}
+  m_Name: BigGun
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemID: 3
+  itemName: BigGun
+  itemSprite: {fileID: 1894098095512659653, guid: 6189898b729e43d488aadf04e256ba55, type: 3}
+  itemType: 0
+  damage: 0
+  defense: 0
+  angleOffset: 90
+  itemAngle: -90
+  TwoHanded: 1

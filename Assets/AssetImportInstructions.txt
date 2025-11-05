@@ -1,0 +1,24 @@
+--INSTRUCTION FILE FOR IMPORTING A NEW ASSET WITH SKIN AND NORMAL MAP SYSTEM--
+
+First - Load a player animation with the format of : source.[SpriteName]_[animationName].png
+
+Second - Load a player map with the format of : [SpriteName].map.png
+
+Third - the script Will generate a Scriptable object and the final animation like [SpriteName]_[animationName].png
+
+Four - Configure the Normal Map :
+	- For convention, save the normal mal as : [SpriteName]_[animationName].NormalMap.png
+	- Texture Type set on "Normal Map"
+	- Remove "Generate Mipmap"
+	- Remove Compression
+Five - Configure the importation config
+	- Pixels Per Unity - 16.
+	- Sprite Mode - Multiple.
+	- (Divide the frames on Sprite Editor).
+	- Assign Normal map on Secondary Texture.
+	- Remove Filter Mode and Set the format as "RG Float".
+six - Load a Sprite skin with the convention name [SpriteName]_[skinName].skin.png (also update importation config)
+
+seven - now you have to make the animations. Then, create a material of "Skin Processor Shader Graph" and load the sourceTexture, the SkinTexture and the size of the Skin Texture on the material.
+
+eight - for utility, will save the Aseprite file with the animations on the same folder, and name it [SpriteName].aseprite.

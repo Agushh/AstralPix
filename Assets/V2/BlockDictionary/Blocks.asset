@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b7c1bffbf2777468cb3247bea0f877, type: 3}
+  m_Name: Blocks
+  m_EditorClassIdentifier: Assembly-CSharp::Blockdictionary
+  atlas: {fileID: -8328923581568760697, guid: 57fa3ec85db74c64985fca6dfbc05e69, type: 3}
+  tilesPerRow: 128
+  tilesPerColumn: 128
+  tiles:
+  - name: Air
+    height: 0
+  - name: Dirt
+    height: 0
+  - name: Grass
+    height: 1
+  - name: Stone
+    height: 2
