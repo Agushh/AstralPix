@@ -396,8 +396,8 @@ public class PlayerScript : MonoBehaviour
         mousePosition = mainCam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, mainCam.nearClipPlane));
         
         blockCursor = new(Mathf.FloorToInt(mousePosition.x), Mathf.FloorToInt(mousePosition.y));
-        chunkCursor = new(Mathf.FloorToInt((float)blockCursor.x/ worldManager.WorldData.ChunkSize), Mathf.FloorToInt((float)blockCursor.y / worldManager.WorldData.ChunkSize));
-        blockRelativeToChunk = blockCursor - chunkCursor * worldManager.WorldData.ChunkSize;
+        chunkCursor = new(Mathf.FloorToInt((float)blockCursor.x/ Chunk.chunkSize), Mathf.FloorToInt((float)blockCursor.y / Chunk.chunkSize));
+        blockRelativeToChunk = blockCursor - chunkCursor * Chunk.chunkSize;
 
 
         Vector2 direction = mousePosition - (Vector2)anglePivot.transform.position;

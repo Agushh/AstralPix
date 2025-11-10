@@ -1,32 +1,24 @@
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
-
-public class WorldDataSerializable
-{
-    public int seed;
-    public List<ChunkEntry> chunks; // lista serializable que reemplaza al diccionario
-}
-
-[System.Serializable]
-public class ChunkEntry
-{
-    public long key;
-    public string path;
-}
 
 public class WorldManager : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private WorldDataScObj worldData;
-    public WorldDataScObj WorldData => worldData;
+    [SerializeField] WorldService worldService;
+    WorldMetaData worldMD;
+
+    static int chunkSize = 32;
+
     [SerializeField] private Blockdictionary blockDictionary;
+
     [SerializeField] private GameObject chunkPrefab;
 
     [Header("Chunk Settings")]
     [SerializeField] private int loadRadius = 1;
 
     private Dictionary<Vector2Int, Chunk> activeChunks = new();
+
+    private Dictionary<Vector2Int, ChunkData> cacheChunkData = new();
+
     private Vector2Int lastPlayerChunk;
     private Vector2Int currentPlayerChunk;
 
@@ -34,14 +26,21 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private Transform player;
 
     [Header("WorldOptions")]
-    [SerializeField] int worldId = 0;
+    [SerializeField] string worldId = "a";
 
     float RuntimeSize;
 
+
+    [SerializeField] float timeIntervalToSave = 100f;
+    float timer = 0;
+
+    private void Awake()
+    {
+        LoadWorld(worldId);
+    }
+
     void Start()
     {
-        worldData = loadWorld(worldId);
-
         UpdateLoadedChunks(GetPlayerChunkPosition());
     }
 
@@ -54,215 +53,196 @@ public class WorldManager : MonoBehaviour
             UpdateLoadedChunks(currentPlayerChunk);
             lastPlayerChunk = currentPlayerChunk;
         }
+
+
+        //Guardado en tiempo 
+        timer += Time.deltaTime;
+        if (timer >= timeIntervalToSave)
+        {
+            timer = 0f;
+        }
+
     }
 
-    public int getBlockOfChunk(Chunk actualChunk, Vector2Int neighChunk, Vector2Int position)
+    void LoadWorld(string worldName)
     {
+        worldMD = worldService.GetWorldMetaData(worldName);
+        //Player.MoveToStartPosition(worldMD.playerPos); u otro
+    }
 
+    public int getBlockOfChunk(Vector2Int neighChunk, Vector2Int position)
+    {
+        // Caso 1: El chunk está activo y cargado. Perfecto.
         if (activeChunks.TryGetValue(neighChunk, out var chunk))
         {
             return chunk.GetBlockAtLocalPosition(position);
         }
-        else
-        {
-            return 0;
-        } 
-            
+
+        // Caso 2: El chunk NO está activo.
+        // NO DEVUELVAS 0. Carga los datos del disco y busca el bloque.
+        ChunkData data = cacheChunkData.ContainsKey(position) ? cacheChunkData[neighChunk] : LoadChunkData(neighChunk, worldMD);
+
+
+        // Devuelve el bloque correcto desde los datos del chunk
+        return data.getBlockMatrix()[position.x, position.y];
     }
 
     #region Runtime functions
     void UpdateLoadedChunks(Vector2Int playerChunk)
     {
-        HashSet<Vector2Int> chunksToKeep = new();
-        List<Chunk> chunksQueNecesitanMalla = new();
-        List<Chunk> vecinosQueNecesitanUpdate = new(); // Clave
+        // --- 1. Cargar nuevos chunks y marcar los que se quedan ---
+        HashSet<Vector2Int> toKeep = new();
 
-        // --- PASE 1: Cargar DATA ---
-        // En este pase, solo creamos los chunks y generamos sus datos (blocks[,]).
-        // NO generamos sus mallas.
-        for (int y = -loadRadius; y <= loadRadius; y++)
+        for (int i = -loadRadius; i <= loadRadius; i++) // FIX: <=
         {
-            for (int x = -loadRadius; x <= loadRadius; x++)
+            for (int j = -loadRadius; j <= loadRadius; j++) // FIX: <=
             {
-                Vector2Int pos = new Vector2Int(playerChunk.x + x, playerChunk.y + y);
-                chunksToKeep.Add(pos);
+                // FIX: Calcular posición relativa al jugador
+                Vector2Int chunkPos = new Vector2Int(playerChunk.x + i, playerChunk.y + j);
+                toKeep.Add(chunkPos); // Marcar para MANTENER
 
-                if (!activeChunks.ContainsKey(pos))
+                if (!activeChunks.ContainsKey(chunkPos))
                 {
-                    // SpawnChunk DEBE ser modificado para que:
-                    // 1. Cree el objeto Chunk.
-                    // 2. Genere/cargue su array blocks[,]
-                    // 3. NO llame a GenerateMesh() o UpdateMesh().
-                    // 4. Devuelva la instancia del chunk.
-                    Chunk newChunk = SpawnChunk(pos);
-                    activeChunks.Add(pos, newChunk);
-
-                    // Este chunk es nuevo, necesitará una malla.
-                    chunksQueNecesitanMalla.Add(newChunk);
-
-                    // IMPORTANTE: Sus vecinos AHORA existen, pero sus mallas
-                    // están obsoletas (muestran un borde vacío donde ahora estás tú).
-                    // Necesitamos encontrar a los vecinos que YA existían y marcarlos
-                    // para un update.
-                    vecinosQueNecesitanUpdate.AddRange(GetActiveNeighbors(pos));
+                    // Este chunk no está cargado, así que hay que cargarlo
+                    ChunkData data = LoadChunkData(chunkPos, worldMD);
+                    Chunk chunk = SpawnChunk(chunkPos, data);
+                    activeChunks.Add(chunkPos, chunk);
                 }
             }
         }
 
-        // --- PASE 2: Generar MALLAS ---
-        // Ahora que TODOS los chunks en el radio de carga existen y
-        // tienen sus datos listos, podemos construir las mallas de forma segura.
-
-        // Primero, actualiza los vecinos antiguos
-        foreach (Chunk neighbor in vecinosQueNecesitanUpdate)
+        // --- 2. Descargar chunks viejos (forma segura) ---
+        List<Vector2Int> toRemove = new List<Vector2Int>();
+        foreach (Vector2Int pos in activeChunks.Keys)
         {
-            // Asegúrate de no actualizar un chunk que también es nuevo
-            if (!chunksQueNecesitanMalla.Contains(neighbor))
+            if (!toKeep.Contains(pos))
             {
-                neighbor.UpdateMesh(-1, 0, 0); // Actualiza Uvs.
-                neighbor.UpdateCollider(); // Actualiza Collider.
+                toRemove.Add(pos);
             }
         }
 
-        // Luego, construye las mallas de los chunks nuevos
-        foreach (Chunk newChunk in chunksQueNecesitanMalla)
+        foreach (Vector2Int pos in toRemove)
         {
-            // UpdateMesh también construye la malla visual por primera vez
-            newChunk.UpdateMesh(-1, 0, 0); 
-            // UpdateCollider construye el collider por primera vez
-            newChunk.UpdateCollider();
+            if (activeChunks[pos].IsDirty) SaveChunk(activeChunks[pos]);
+
+            Destroy(activeChunks[pos].gameObject); // Destruir el GameObject
+            activeChunks.Remove(pos); // Quitar del diccionario
+            cacheChunkData.Remove(pos); // Quitar del caché
         }
-
-
-        // --- PASE 3: Descargar Chunks ---
-        // Esto debería estar en su propio bucle, separado de la lógica de carga.
-        List<Vector2Int> toRemove = new();
-        foreach (var kvp in activeChunks)
-        {
-            if (!chunksToKeep.Contains(kvp.Key))
-            {
-                toRemove.Add(kvp.Key);
-            }
-        }
-
-        foreach (var pos in toRemove)
-        {
-            Destroy(activeChunks[pos].gameObject);
-            activeChunks.Remove(pos);
-        }
-
-        // SaveWorld() probablemente no debería llamarse en cada Update,
-        // sino periódicamente o al cerrar el juego.
     }
 
-    // Función auxiliar que necesitarás
-    List<Chunk> GetActiveNeighbors(Vector2Int chunkPos)
+    //GENERATES OR LOAD A CACHE OF THE 8 ADJACENT CHUNKS
+    private ChunkData LoadChunkData(Vector2Int pos, WorldMetaData wmd) 
     {
-        List<Chunk> neighbors = new List<Chunk>();
-        Vector2Int[] neighborPos = {
-        chunkPos + Vector2Int.up,
-        chunkPos + Vector2Int.down,
-        chunkPos + Vector2Int.left,
-        chunkPos + Vector2Int.right
-        // (Puedes añadir diagonales si tu autotiling las afecta)
-    };
-
-        foreach (var pos in neighborPos)
+        ChunkData chunkData;
+        for (int i = -1; i <= 1; i++)
         {
-            if (activeChunks.TryGetValue(pos, out Chunk neighbor))
+            for(int j = -1; j <= 1; j++)
             {
-                neighbors.Add(neighbor);
+                if (i == 0 && j == 0) continue;
+                Vector2Int neighborPos = new(pos.x + i, pos.y + j);
+                
+                if (cacheChunkData.ContainsKey(neighborPos)) continue;
+                
+                chunkData = worldService.GetChunk(wmd, neighborPos);
+                cacheChunkData.TryAdd(neighborPos,chunkData);
             }
         }
-        return neighbors;
+        if (cacheChunkData.ContainsKey(pos))
+            return cacheChunkData[pos];
+
+        chunkData = worldService.GetChunk(wmd, pos);
+        cacheChunkData.Add(pos, chunkData);
+        
+        return chunkData;
     }
-    Chunk SpawnChunk(Vector2Int chunkPos)
+
+    Chunk SpawnChunk(Vector2Int chunkPos, ChunkData chunkData)
     {
         GameObject obj = Instantiate(chunkPrefab, ChunkToWorldPos(chunkPos), Quaternion.identity, transform);
         Chunk chunk = obj.GetComponent<Chunk>();
 
         chunk.name = $"Chunk {chunkPos.x},{chunkPos.y}";
-        chunk.SetData(chunkPos, worldData, blockDictionary, this); 
+        chunk.SetData(chunkPos, worldMD, blockDictionary, this, chunkData); 
 
         return chunk;
     }
     #endregion
     
-    //player function
     public void UpdateChunk(Vector2Int chunkPos, Vector2Int cursor, int newBlock)
     {
-        activeChunks[chunkPos].UpdateChunk(cursor, newBlock);
-    }
-
-    #region World Save/Load
-    WorldDataScObj loadWorld(int worldSeed)
-    {
-        string path = GetWorldPath(worldSeed);
-        if (!File.Exists(path))
+        if (!activeChunks.ContainsKey(chunkPos))
         {
-            return CreateWorld();
+            Debug.LogError("Mouse fuera de chunks");
+            return;
+        }
+        activeChunks[chunkPos].PlaceBlock(cursor, newBlock);
+
+        if(cursor.x == 0)
+        {
+            Vector2Int neigh = new(chunkPos.x - 1, chunkPos.y);
+            activeChunks.TryGetValue(neigh, out var chunk);
+            if (chunk != null) activeChunks[neigh].UpdateChunk();
+        }
+        else if(cursor.x == chunkSize -1)
+        {
+            Vector2Int neigh = new(chunkPos.x + 1, chunkPos.y);
+            activeChunks.TryGetValue(neigh, out var chunk);
+            if (chunk != null) activeChunks[neigh].UpdateChunk();
+        }
+        if (cursor.y == 0)
+        {
+            Vector2Int neigh = new(chunkPos.x , chunkPos.y - 1);
+            activeChunks.TryGetValue(neigh, out var chunk);
+            if (chunk != null) activeChunks[neigh].UpdateChunk();
+        }
+        else if (cursor.y == chunkSize - 1)
+        {
+            Vector2Int neigh = new(chunkPos.x , chunkPos.y + 1);
+            activeChunks.TryGetValue(neigh, out var chunk);
+            if (chunk != null) activeChunks[neigh].UpdateChunk();
         }
 
-        string json = File.ReadAllText(path);
-
-        WorldDataSerializable data = JsonUtility.FromJson<WorldDataSerializable>(json);
-
-        var worldData = ScriptableObject.CreateInstance<WorldDataScObj>();
-        
-        worldData.Seed = data.seed;
-        worldData.ChunkData = new Dictionary<long, string>();
-        foreach (var chunk in data.chunks)
-        {
-            worldData.ChunkData[chunk.key] = chunk.path;
-        }
-
-        return worldData;
-    }
-
-    WorldDataScObj CreateWorld()
-    {
-        WorldDataScObj data = ScriptableObject.CreateInstance<WorldDataScObj>();
-        data.Seed = Random.Range(int.MinValue, int.MaxValue);
-        data.ChunkData = new Dictionary<long, string>();
-        return data;
     }
 
     void SaveWorld()
     {
-        WorldDataSerializable serializable = new WorldDataSerializable
+        foreach(Chunk chunk in activeChunks.Values)
         {
-            seed = worldData.Seed,
-            chunks = new List<ChunkEntry>()
-        };
-
-        foreach (var kvp in worldData.ChunkData)
-        {
-            serializable.chunks.Add(new ChunkEntry { key = kvp.Key, path = kvp.Value });
+            SaveChunk(chunk);
         }
-        string path = GetWorldPath(worldId);
-        string json = JsonUtility.ToJson(serializable, true);
-        File.WriteAllText(path, json);
-        //Debug.Log($" Mundo {worldData.Seed} guardado en {path}");
     }
-    #endregion
+
+    public void SaveChunk(Chunk chunk)
+    {
+        ChunkData data = new(chunk.Position, chunk.Blocks, chunk.Collisions);
+        worldService.saveChunk(data, worldMD);
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveWorld();
+    }
+
 
     #region Helpers
-    string GetWorldPath(int worldId)
-    {
-        string folder = Path.Combine(Application.persistentDataPath, "worlds");
-        Directory.CreateDirectory(folder);
-        return Path.Combine(folder, worldId + ".json");
-    }
     Vector3 ChunkToWorldPos(Vector2Int chunkPos)
     {
-        return new Vector3(chunkPos.x * worldData.ChunkSize, chunkPos.y * worldData.ChunkSize, 0);
+        return new Vector3(chunkPos.x * chunkSize, chunkPos.y * chunkSize, 0);
     }
     Vector2Int GetPlayerChunkPosition()
     {
         Vector2 pos = player.position;
-        int cx = Mathf.FloorToInt(pos.x / worldData.ChunkSize);
-        int cy = Mathf.FloorToInt(pos.y / worldData.ChunkSize);
+        int cx = Mathf.FloorToInt(pos.x / chunkSize);
+        int cy = Mathf.FloorToInt(pos.y / chunkSize);
         return new Vector2Int(cx, cy);
     }
+
+    private string GetKey(Vector2Int pos)
+    {
+        return $"{pos.x}_{pos.y}";
+    }
+
+
     #endregion
 }
