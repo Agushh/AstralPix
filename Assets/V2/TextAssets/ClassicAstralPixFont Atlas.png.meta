@@ -1,0 +1,2691 @@
+fileFormatVersion: 2
+guid: de31e5e577c867f49ba4ab60572feb65
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7123192014518891124
+    second: ClassicAstralPixFont Atlas_0
+  - first:
+      213: 7427415819258330846
+    second: ClassicAstralPixFont Atlas_1
+  - first:
+      213: -8006818593725451071
+    second: ClassicAstralPixFont Atlas_2
+  - first:
+      213: 2629435470579177046
+    second: ClassicAstralPixFont Atlas_3
+  - first:
+      213: -3516715183147071605
+    second: ClassicAstralPixFont Atlas_4
+  - first:
+      213: 323761183598718892
+    second: ClassicAstralPixFont Atlas_5
+  - first:
+      213: -8775258138947276294
+    second: ClassicAstralPixFont Atlas_6
+  - first:
+      213: -677395143195526430
+    second: ClassicAstralPixFont Atlas_7
+  - first:
+      213: 831500702689961465
+    second: ClassicAstralPixFont Atlas_8
+  - first:
+      213: 6518552400395087844
+    second: ClassicAstralPixFont Atlas_9
+  - first:
+      213: -8385912915796495067
+    second: ClassicAstralPixFont Atlas_10
+  - first:
+      213: 7886253975497542527
+    second: ClassicAstralPixFont Atlas_11
+  - first:
+      213: -6552974338090511180
+    second: ClassicAstralPixFont Atlas_12
+  - first:
+      213: -5841025984853257241
+    second: ClassicAstralPixFont Atlas_13
+  - first:
+      213: -8852025524104992046
+    second: ClassicAstralPixFont Atlas_14
+  - first:
+      213: 4543322173296706317
+    second: ClassicAstralPixFont Atlas_15
+  - first:
+      213: 4373054855412124539
+    second: ClassicAstralPixFont Atlas_16
+  - first:
+      213: 454887920742879287
+    second: ClassicAstralPixFont Atlas_17
+  - first:
+      213: -4531732261337734623
+    second: ClassicAstralPixFont Atlas_18
+  - first:
+      213: 1304186090531383379
+    second: ClassicAstralPixFont Atlas_19
+  - first:
+      213: -9204498548939849469
+    second: ClassicAstralPixFont Atlas_20
+  - first:
+      213: 7182596472827426261
+    second: ClassicAstralPixFont Atlas_21
+  - first:
+      213: 5952962721548607731
+    second: ClassicAstralPixFont Atlas_22
+  - first:
+      213: 7926087022015656743
+    second: ClassicAstralPixFont Atlas_23
+  - first:
+      213: 751668155784329683
+    second: ClassicAstralPixFont Atlas_24
+  - first:
+      213: -4334208841222699198
+    second: ClassicAstralPixFont Atlas_25
+  - first:
+      213: 5839532085895978940
+    second: ClassicAstralPixFont Atlas_26
+  - first:
+      213: 6842046514170301504
+    second: ClassicAstralPixFont Atlas_27
+  - first:
+      213: -7346434146790551156
+    second: ClassicAstralPixFont Atlas_28
+  - first:
+      213: 6512446457677283864
+    second: ClassicAstralPixFont Atlas_29
+  - first:
+      213: -6213069124566195879
+    second: ClassicAstralPixFont Atlas_30
+  - first:
+      213: -195453043251653758
+    second: ClassicAstralPixFont Atlas_31
+  - first:
+      213: -7009987163641946632
+    second: ClassicAstralPixFont Atlas_32
+  - first:
+      213: -4351739995733515052
+    second: ClassicAstralPixFont Atlas_33
+  - first:
+      213: 7564398146706999157
+    second: ClassicAstralPixFont Atlas_34
+  - first:
+      213: 9003424928929504656
+    second: ClassicAstralPixFont Atlas_35
+  - first:
+      213: 154013986421518229
+    second: ClassicAstralPixFont Atlas_36
+  - first:
+      213: -2193404516943166873
+    second: ClassicAstralPixFont Atlas_37
+  - first:
+      213: -7269902153682037498
+    second: ClassicAstralPixFont Atlas_38
+  - first:
+      213: -5530769271439667831
+    second: ClassicAstralPixFont Atlas_39
+  - first:
+      213: 1082936385515222322
+    second: ClassicAstralPixFont Atlas_40
+  - first:
+      213: 4577079310861871188
+    second: ClassicAstralPixFont Atlas_41
+  - first:
+      213: -7038375399062062766
+    second: ClassicAstralPixFont Atlas_42
+  - first:
+      213: -1788792267324755455
+    second: ClassicAstralPixFont Atlas_43
+  - first:
+      213: -1793994822420792166
+    second: ClassicAstralPixFont Atlas_44
+  - first:
+      213: 4458804165333150493
+    second: ClassicAstralPixFont Atlas_45
+  - first:
+      213: -7381623986152518709
+    second: ClassicAstralPixFont Atlas_46
+  - first:
+      213: 3368985009217140565
+    second: ClassicAstralPixFont Atlas_47
+  - first:
+      213: 7183903249903775879
+    second: ClassicAstralPixFont Atlas_48
+  - first:
+      213: 5582710636527547700
+    second: ClassicAstralPixFont Atlas_49
+  - first:
+      213: 8523514235107724536
+    second: ClassicAstralPixFont Atlas_50
+  - first:
+      213: 6814087645641614496
+    second: ClassicAstralPixFont Atlas_51
+  - first:
+      213: -3833338301244996789
+    second: ClassicAstralPixFont Atlas_52
+  - first:
+      213: 5364355379633551302
+    second: ClassicAstralPixFont Atlas_53
+  - first:
+      213: -984951975455707925
+    second: ClassicAstralPixFont Atlas_54
+  - first:
+      213: -7648274742865936644
+    second: ClassicAstralPixFont Atlas_55
+  - first:
+      213: 1251803454402528836
+    second: ClassicAstralPixFont Atlas_56
+  - first:
+      213: -2216323582565345058
+    second: ClassicAstralPixFont Atlas_57
+  - first:
+      213: 1227252592980164584
+    second: ClassicAstralPixFont Atlas_58
+  - first:
+      213: 893502467150775592
+    second: ClassicAstralPixFont Atlas_59
+  - first:
+      213: -2987707770076622008
+    second: ClassicAstralPixFont Atlas_60
+  - first:
+      213: 756905439211441811
+    second: ClassicAstralPixFont Atlas_61
+  - first:
+      213: 6082411793226047694
+    second: ClassicAstralPixFont Atlas_62
+  - first:
+      213: 5687359240721527635
+    second: ClassicAstralPixFont Atlas_63
+  - first:
+      213: 5428542041998472263
+    second: ClassicAstralPixFont Atlas_64
+  - first:
+      213: -8403042624470989383
+    second: ClassicAstralPixFont Atlas_65
+  - first:
+      213: 6848570090589179135
+    second: ClassicAstralPixFont Atlas_66
+  - first:
+      213: -1050257074204527158
+    second: ClassicAstralPixFont Atlas_67
+  - first:
+      213: 1541126229912900896
+    second: ClassicAstralPixFont Atlas_68
+  - first:
+      213: 6774231468391745610
+    second: ClassicAstralPixFont Atlas_69
+  - first:
+      213: -743473532705354741
+    second: ClassicAstralPixFont Atlas_70
+  - first:
+      213: 4936521745493398325
+    second: ClassicAstralPixFont Atlas_71
+  - first:
+      213: 3540043672544284961
+    second: ClassicAstralPixFont Atlas_72
+  - first:
+      213: 1609809197239246191
+    second: ClassicAstralPixFont Atlas_73
+  - first:
+      213: 6537014655006229667
+    second: ClassicAstralPixFont Atlas_74
+  - first:
+      213: -6787615586090328034
+    second: ClassicAstralPixFont Atlas_75
+  - first:
+      213: 1699544354862986986
+    second: ClassicAstralPixFont Atlas_76
+  - first:
+      213: 5499640618542095490
+    second: ClassicAstralPixFont Atlas_77
+  - first:
+      213: -1295700777661144614
+    second: ClassicAstralPixFont Atlas_78
+  - first:
+      213: 8644360440484372860
+    second: ClassicAstralPixFont Atlas_79
+  - first:
+      213: 1394435022868767039
+    second: ClassicAstralPixFont Atlas_80
+  - first:
+      213: 1131704900251958451
+    second: ClassicAstralPixFont Atlas_81
+  - first:
+      213: -7131980937297246618
+    second: ClassicAstralPixFont Atlas_82
+  - first:
+      213: -7041343839311112126
+    second: ClassicAstralPixFont Atlas_83
+  - first:
+      213: -4797240907235696605
+    second: ClassicAstralPixFont Atlas_84
+  - first:
+      213: 1421758952589506812
+    second: ClassicAstralPixFont Atlas_85
+  - first:
+      213: -8735718160962263539
+    second: ClassicAstralPixFont Atlas_86
+  - first:
+      213: 8348524825822278157
+    second: ClassicAstralPixFont Atlas_87
+  - first:
+      213: -1307363810960355756
+    second: ClassicAstralPixFont Atlas_88
+  - first:
+      213: 8657015558868095645
+    second: ClassicAstralPixFont Atlas_89
+  - first:
+      213: 1553425839387808759
+    second: ClassicAstralPixFont Atlas_90
+  - first:
+      213: 4442858992132799081
+    second: ClassicAstralPixFont Atlas_91
+  - first:
+      213: 3597962696531931377
+    second: ClassicAstralPixFont Atlas_92
+  - first:
+      213: -4083571456588846091
+    second: ClassicAstralPixFont Atlas_93
+  - first:
+      213: -7678222030761491971
+    second: ClassicAstralPixFont Atlas_94
+  - first:
+      213: 3487720626874636385
+    second: ClassicAstralPixFont Atlas_95
+  - first:
+      213: -5668629082002103506
+    second: ClassicAstralPixFont Atlas_96
+  - first:
+      213: -7789499498995163162
+    second: ClassicAstralPixFont Atlas_97
+  - first:
+      213: 3473967985183054497
+    second: ClassicAstralPixFont Atlas_98
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 249
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8dc3b36a96552d90800000000000000
+      internalID: -7123192014518891124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_1
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 249
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ede7202e55b731760800000000000000
+      internalID: 7427415819258330846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 231
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c4700439e012e090800000000000000
+      internalID: -8006818593725451071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_3
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 231
+        width: 6
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6561faf01a1ad7420800000000000000
+      internalID: 2629435470579177046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_4
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 215
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b87cb4c5c2e123fc0800000000000000
+      internalID: -3516715183147071605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_5
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 210
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caf2674c41b3e7400800000000000000
+      internalID: 323761183598718892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_6
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 215
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af131b74735083680800000000000000
+      internalID: -8775258138947276294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_7
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 199
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ea714dc4b86996f0800000000000000
+      internalID: -677395143195526430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_8
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 192
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f5a25ecb751a8b00800000000000000
+      internalID: 831500702689961465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_9
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 205
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4efa1531fdc867a50800000000000000
+      internalID: 6518552400395087844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_10
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 183
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 525f69032a04f9b80800000000000000
+      internalID: -8385912915796495067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_11
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 192
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7b0b02253a917d60800000000000000
+      internalID: 7886253975497542527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_12
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 167
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b45dd30f882f05a0800000000000000
+      internalID: -6552974338090511180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_13
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 176
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e3def850d180fea0800000000000000
+      internalID: -5841025984853257241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_14
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 181
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dae7059fa9472580800000000000000
+      internalID: -8852025524104992046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_15
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 159
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d03818fe17f1d0f30800000000000000
+      internalID: 4543322173296706317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_16
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 160
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7b0328b83630bc30800000000000000
+      internalID: 4373054855412124539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_17
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 163
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 730de706726105600800000000000000
+      internalID: 454887920742879287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_18
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 149
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12269c9b48d0c11c0800000000000000
+      internalID: -4531732261337734623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_19
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 144
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 358e027e656691210800000000000000
+      internalID: 1304186090531383379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_20
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 145
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30187d6565d034080800000000000000
+      internalID: -9204498548939849469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_21
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 131
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d53adfdf65bda360800000000000000
+      internalID: 7182596472827426261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_22
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 127
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f02c0b1e0c2d9250800000000000000
+      internalID: 5952962721548607731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_23
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 127
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 723b31ef62e1ffd60800000000000000
+      internalID: 7926087022015656743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_24
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 127
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d97f7684367e6a00800000000000000
+      internalID: 751668155784329683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_25
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 113
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2474094c50cc9d3c0800000000000000
+      internalID: -4334208841222699198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_26
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 109
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbf53523e7f2a0150800000000000000
+      internalID: 5839532085895978940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_27
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 109
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04c02ddcd05d3fe50800000000000000
+      internalID: 6842046514170301504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_28
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 95
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c81dfba01193c0a90800000000000000
+      internalID: -7346434146790551156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_29
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 91
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8120b908c8bd06a50800000000000000
+      internalID: 6512446457677283864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_30
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 91
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 951e849ac8eb6c9a0800000000000000
+      internalID: -6213069124566195879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_31
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 91
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28357b22e7c994df0800000000000000
+      internalID: -195453043251653758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_32
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 91
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fdd21fa0d587be90800000000000000
+      internalID: -7009987163641946632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_33
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 77
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d4a177c7838b93c0800000000000000
+      internalID: -4351739995733515052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_34
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 73
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 577081a59042af860800000000000000
+      internalID: 7564398146706999157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_35
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 73
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09d5dba454792fc70800000000000000
+      internalID: 9003424928929504656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_36
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 73
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59fa81797ea232200800000000000000
+      internalID: 154013986421518229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_37
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 73
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7628dd686367f81e0800000000000000
+      internalID: -2193404516943166873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_38
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 59
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6055fe1428e1c1b90800000000000000
+      internalID: -7269902153682037498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_39
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 55
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98d4131a6a2ce33b0800000000000000
+      internalID: -5530769271439667831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_40
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 55
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 235fafca7ec570f00800000000000000
+      internalID: 1082936385515222322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_41
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 55
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45826b0026d058f30800000000000000
+      internalID: 4577079310861871188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_42
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 55
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 259be0f8ddaa25e90800000000000000
+      internalID: -7038375399062062766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_43
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 55
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 102742909eeec27e0800000000000000
+      internalID: -1788792267324755455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_44
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 55
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9cf7b8c6337a17e0800000000000000
+      internalID: -1793994822420792166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_45
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 55
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1be6bdb3cad0ed30800000000000000
+      internalID: 4458804165333150493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_46
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 63
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcb40e718143f8990800000000000000
+      internalID: -7381623986152518709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_47
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 63
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 557f008240a01ce20800000000000000
+      internalID: 3368985009217140565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_48
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 41
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 780f94f91f952b360800000000000000
+      internalID: 7183903249903775879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_49
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 37
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 435f406deb5c97d40800000000000000
+      internalID: 5582710636527547700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_50
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 37
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fcc49d890b994670800000000000000
+      internalID: 8523514235107724536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_51
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 37
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a4a8d27c90809e50800000000000000
+      internalID: 6814087645641614496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_52
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 37
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b43846aff1f3dcac0800000000000000
+      internalID: -3833338301244996789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_53
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 37
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c77304dbc4027a40800000000000000
+      internalID: 5364355379633551302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_54
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 37
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beca426956fb452f0800000000000000
+      internalID: -984951975455707925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_55
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 53
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfe32e6c4aedbd590800000000000000
+      internalID: -7648274742865936644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_56
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 53
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44605440c9c4f5110800000000000000
+      internalID: 1251803454402528836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_57
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 37
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed81fd9b1790e31e0800000000000000
+      internalID: -2216323582565345058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_58
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 37
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ef72462bb3180110800000000000000
+      internalID: 1227252592980164584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_59
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 45
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 825057882cb566c00800000000000000
+      internalID: 893502467150775592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_60
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 21
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84398e7dc978986d0800000000000000
+      internalID: -2987707770076622008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_61
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 19
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39e42c89c71118a00800000000000000
+      internalID: 756905439211441811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_62
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 19
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec0a2e8cc41196450800000000000000
+      internalID: 6082411793226047694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_63
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 19
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 353fd35b81f8dee40800000000000000
+      internalID: 5687359240721527635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_64
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 19
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 744b79db93e065b40800000000000000
+      internalID: 5428542041998472263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_65
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 19
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b5c0f71145626b80800000000000000
+      internalID: -8403042624470989383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_66
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 19
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffcceec46320b0f50800000000000000
+      internalID: 6848570090589179135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_67
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 19
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac5b23961ccbc61f0800000000000000
+      internalID: -1050257074204527158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_68
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 19
+        width: 6
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 025deff042e236510800000000000000
+      internalID: 1541126229912900896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_69
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 17
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4843cb01a7e20e50800000000000000
+      internalID: 6774231468391745610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_70
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 17
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0c4137d2c6aea5f0800000000000000
+      internalID: -743473532705354741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_71
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 17
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 533102a6f5c028440800000000000000
+      internalID: 4936521745493398325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_72
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 23
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1211f57d6f2c02130800000000000000
+      internalID: 3540043672544284961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_73
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 17
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6d1a9d8fe0375610800000000000000
+      internalID: 1609809197239246191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_74
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 14
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a44b23b13428ba50800000000000000
+      internalID: 6537014655006229667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_75
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 14
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e106e27369b8dc1a0800000000000000
+      internalID: -6787615586090328034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_76
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 14
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae6f0af069ef59710800000000000000
+      internalID: 1699544354862986986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_77
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 14
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28cd2841106a25c40800000000000000
+      internalID: 5499640618542095490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_78
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 14
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad16f44f10fb40ee0800000000000000
+      internalID: -1295700777661144614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_79
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 14
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c71a2855500f6f770800000000000000
+      internalID: 8644360440484372860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_80
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f31e478e3470a5310800000000000000
+      internalID: 1394435022868767039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_81
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 1
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bc361a5c9f94bf00800000000000000
+      internalID: 1131704900251958451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_82
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 1
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6664a87df1d160d90800000000000000
+      internalID: -7131980937297246618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_83
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 1
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 248d974b51f184e90800000000000000
+      internalID: -7041343839311112126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_84
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 1
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3206e3ecfc6cc6db0800000000000000
+      internalID: -4797240907235696605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_85
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 1
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf8345d0c3a1bb310800000000000000
+      internalID: 1421758952589506812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_86
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 1
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d066aedcd9e74c680800000000000000
+      internalID: -8735718160962263539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_87
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 1
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d02baa1c81bebd370800000000000000
+      internalID: 8348524825822278157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_88
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 1
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45ec1876a8f4bdde0800000000000000
+      internalID: -1307363810960355756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_89
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 1
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d92dc51b8c5e32870800000000000000
+      internalID: 8657015558868095645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_90
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 1
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f39f9d0290ee8510800000000000000
+      internalID: 1553425839387808759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_91
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 1
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96ab93dc6b438ad30800000000000000
+      internalID: 4442858992132799081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_92
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 14
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f074e972088ee130800000000000000
+      internalID: 3597962696531931377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_93
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 1
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fbe81b556d3457c0800000000000000
+      internalID: -4083571456588846091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_94
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 1
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df102e57eb9717590800000000000000
+      internalID: -7678222030761491971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_95
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 1
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1685aa07e6fd66030800000000000000
+      internalID: 3487720626874636385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_96
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 1
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e23e0d332ebf451b0800000000000000
+      internalID: -5668629082002103506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_97
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 1
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ef5f48e97326e390800000000000000
+      internalID: -7789499498995163162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClassicAstralPixFont Atlas_98
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 1
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aa5ae50a73063030800000000000000
+      internalID: 3473967985183054497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ClassicAstralPixFont Atlas_0: -7123192014518891124
+      ClassicAstralPixFont Atlas_1: 7427415819258330846
+      ClassicAstralPixFont Atlas_10: -8385912915796495067
+      ClassicAstralPixFont Atlas_11: 7886253975497542527
+      ClassicAstralPixFont Atlas_12: -6552974338090511180
+      ClassicAstralPixFont Atlas_13: -5841025984853257241
+      ClassicAstralPixFont Atlas_14: -8852025524104992046
+      ClassicAstralPixFont Atlas_15: 4543322173296706317
+      ClassicAstralPixFont Atlas_16: 4373054855412124539
+      ClassicAstralPixFont Atlas_17: 454887920742879287
+      ClassicAstralPixFont Atlas_18: -4531732261337734623
+      ClassicAstralPixFont Atlas_19: 1304186090531383379
+      ClassicAstralPixFont Atlas_2: -8006818593725451071
+      ClassicAstralPixFont Atlas_20: -9204498548939849469
+      ClassicAstralPixFont Atlas_21: 7182596472827426261
+      ClassicAstralPixFont Atlas_22: 5952962721548607731
+      ClassicAstralPixFont Atlas_23: 7926087022015656743
+      ClassicAstralPixFont Atlas_24: 751668155784329683
+      ClassicAstralPixFont Atlas_25: -4334208841222699198
+      ClassicAstralPixFont Atlas_26: 5839532085895978940
+      ClassicAstralPixFont Atlas_27: 6842046514170301504
+      ClassicAstralPixFont Atlas_28: -7346434146790551156
+      ClassicAstralPixFont Atlas_29: 6512446457677283864
+      ClassicAstralPixFont Atlas_3: 2629435470579177046
+      ClassicAstralPixFont Atlas_30: -6213069124566195879
+      ClassicAstralPixFont Atlas_31: -195453043251653758
+      ClassicAstralPixFont Atlas_32: -7009987163641946632
+      ClassicAstralPixFont Atlas_33: -4351739995733515052
+      ClassicAstralPixFont Atlas_34: 7564398146706999157
+      ClassicAstralPixFont Atlas_35: 9003424928929504656
+      ClassicAstralPixFont Atlas_36: 154013986421518229
+      ClassicAstralPixFont Atlas_37: -2193404516943166873
+      ClassicAstralPixFont Atlas_38: -7269902153682037498
+      ClassicAstralPixFont Atlas_39: -5530769271439667831
+      ClassicAstralPixFont Atlas_4: -3516715183147071605
+      ClassicAstralPixFont Atlas_40: 1082936385515222322
+      ClassicAstralPixFont Atlas_41: 4577079310861871188
+      ClassicAstralPixFont Atlas_42: -7038375399062062766
+      ClassicAstralPixFont Atlas_43: -1788792267324755455
+      ClassicAstralPixFont Atlas_44: -1793994822420792166
+      ClassicAstralPixFont Atlas_45: 4458804165333150493
+      ClassicAstralPixFont Atlas_46: -7381623986152518709
+      ClassicAstralPixFont Atlas_47: 3368985009217140565
+      ClassicAstralPixFont Atlas_48: 7183903249903775879
+      ClassicAstralPixFont Atlas_49: 5582710636527547700
+      ClassicAstralPixFont Atlas_5: 323761183598718892
+      ClassicAstralPixFont Atlas_50: 8523514235107724536
+      ClassicAstralPixFont Atlas_51: 6814087645641614496
+      ClassicAstralPixFont Atlas_52: -3833338301244996789
+      ClassicAstralPixFont Atlas_53: 5364355379633551302
+      ClassicAstralPixFont Atlas_54: -984951975455707925
+      ClassicAstralPixFont Atlas_55: -7648274742865936644
+      ClassicAstralPixFont Atlas_56: 1251803454402528836
+      ClassicAstralPixFont Atlas_57: -2216323582565345058
+      ClassicAstralPixFont Atlas_58: 1227252592980164584
+      ClassicAstralPixFont Atlas_59: 893502467150775592
+      ClassicAstralPixFont Atlas_6: -8775258138947276294
+      ClassicAstralPixFont Atlas_60: -2987707770076622008
+      ClassicAstralPixFont Atlas_61: 756905439211441811
+      ClassicAstralPixFont Atlas_62: 6082411793226047694
+      ClassicAstralPixFont Atlas_63: 5687359240721527635
+      ClassicAstralPixFont Atlas_64: 5428542041998472263
+      ClassicAstralPixFont Atlas_65: -8403042624470989383
+      ClassicAstralPixFont Atlas_66: 6848570090589179135
+      ClassicAstralPixFont Atlas_67: -1050257074204527158
+      ClassicAstralPixFont Atlas_68: 1541126229912900896
+      ClassicAstralPixFont Atlas_69: 6774231468391745610
+      ClassicAstralPixFont Atlas_7: -677395143195526430
+      ClassicAstralPixFont Atlas_70: -743473532705354741
+      ClassicAstralPixFont Atlas_71: 4936521745493398325
+      ClassicAstralPixFont Atlas_72: 3540043672544284961
+      ClassicAstralPixFont Atlas_73: 1609809197239246191
+      ClassicAstralPixFont Atlas_74: 6537014655006229667
+      ClassicAstralPixFont Atlas_75: -6787615586090328034
+      ClassicAstralPixFont Atlas_76: 1699544354862986986
+      ClassicAstralPixFont Atlas_77: 5499640618542095490
+      ClassicAstralPixFont Atlas_78: -1295700777661144614
+      ClassicAstralPixFont Atlas_79: 8644360440484372860
+      ClassicAstralPixFont Atlas_8: 831500702689961465
+      ClassicAstralPixFont Atlas_80: 1394435022868767039
+      ClassicAstralPixFont Atlas_81: 1131704900251958451
+      ClassicAstralPixFont Atlas_82: -7131980937297246618
+      ClassicAstralPixFont Atlas_83: -7041343839311112126
+      ClassicAstralPixFont Atlas_84: -4797240907235696605
+      ClassicAstralPixFont Atlas_85: 1421758952589506812
+      ClassicAstralPixFont Atlas_86: -8735718160962263539
+      ClassicAstralPixFont Atlas_87: 8348524825822278157
+      ClassicAstralPixFont Atlas_88: -1307363810960355756
+      ClassicAstralPixFont Atlas_89: 8657015558868095645
+      ClassicAstralPixFont Atlas_9: 6518552400395087844
+      ClassicAstralPixFont Atlas_90: 1553425839387808759
+      ClassicAstralPixFont Atlas_91: 4442858992132799081
+      ClassicAstralPixFont Atlas_92: 3597962696531931377
+      ClassicAstralPixFont Atlas_93: -4083571456588846091
+      ClassicAstralPixFont Atlas_94: -7678222030761491971
+      ClassicAstralPixFont Atlas_95: 3487720626874636385
+      ClassicAstralPixFont Atlas_96: -5668629082002103506
+      ClassicAstralPixFont Atlas_97: -7789499498995163162
+      ClassicAstralPixFont Atlas_98: 3473967985183054497
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -51,6 +51,10 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] float angle;
     [SerializeField] Vector2 mousePosition;
     [SerializeField] Vector2Int blockCursor, chunkCursor, blockRelativeToChunk;
+    public Vector2Int BlockCursor => blockCursor;
+    public Vector2Int ChunkCursor => chunkCursor;
+
+    public Vector2Int BlockRelativeToChunk => blockRelativeToChunk;
     [SerializeField] float mouseDistance;
     [SerializeField] Vector2 moveInput;
     bool isCrouching = false;

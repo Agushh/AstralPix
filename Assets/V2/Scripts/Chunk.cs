@@ -23,7 +23,7 @@ public class Chunk : MonoBehaviour
     MeshRenderer meshRenderer;
     PolygonCollider2D polyCollider;
 
-    Blockdictionary blockdictionary;
+    [SerializeField]Blockdictionary blockdictionary;
     WorldMetaData wmd;
     WorldManager worldManager;
 
@@ -49,11 +49,10 @@ public class Chunk : MonoBehaviour
     public bool IsDirty => isDirty;
 
     //"Constructor de chunk". Se utiliza al deserealizar, luego de instanciar, y se setean sus valores desde WorldManager.
-    public void SetData(Vector2Int index, WorldMetaData worldData, Blockdictionary blockdictionary, WorldManager worldManager, ChunkData cd)
+    public void SetData(Vector2Int index, WorldMetaData worldData, WorldManager worldManager, ChunkData cd)
     {
         position = index;
         wmd = worldData;
-        this.blockdictionary = blockdictionary;
         this.worldManager = worldManager;
 
         meshFilter = GetComponent<MeshFilter>();
@@ -455,7 +454,7 @@ public class Chunk : MonoBehaviour
         return neighborBlock != 0; // O '== block'
     }
 
-    public int GetBlockAtLocalPosition(Vector2Int position)
+    public int GetBlockAtPosition(Vector2Int position)
     {
         return blocks[position.x, position.y];
     }

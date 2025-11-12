@@ -8,8 +8,6 @@ public class WorldManager : MonoBehaviour
 
     static int chunkSize = 32;
 
-    [SerializeField] private Blockdictionary blockDictionary;
-
     [SerializeField] private GameObject chunkPrefab;
 
     [Header("Chunk Settings")]
@@ -21,12 +19,14 @@ public class WorldManager : MonoBehaviour
 
     private Vector2Int lastPlayerChunk;
     private Vector2Int currentPlayerChunk;
+    public Vector2Int CurrentPlayerChunk => currentPlayerChunk;
 
     [Header("Player")]
     [SerializeField] private Transform player;
 
     [Header("WorldOptions")]
-    [SerializeField] string worldId = "a";
+    [SerializeField] string worldId = "";
+    public string WorldId => worldId;
 
     float RuntimeSize;
 
@@ -75,7 +75,7 @@ public class WorldManager : MonoBehaviour
         // Caso 1: El chunk está activo y cargado. Perfecto.
         if (activeChunks.TryGetValue(neighChunk, out var chunk))
         {
-            return chunk.GetBlockAtLocalPosition(position);
+            return chunk.GetBlockAtPosition(position);
         }
 
         // Caso 2: El chunk NO está activo.
@@ -163,7 +163,7 @@ public class WorldManager : MonoBehaviour
         Chunk chunk = obj.GetComponent<Chunk>();
 
         chunk.name = $"Chunk {chunkPos.x},{chunkPos.y}";
-        chunk.SetData(chunkPos, worldMD, blockDictionary, this, chunkData); 
+        chunk.SetData(chunkPos, worldMD, this, chunkData); 
 
         return chunk;
     }
@@ -230,7 +230,7 @@ public class WorldManager : MonoBehaviour
     {
         return new Vector3(chunkPos.x * chunkSize, chunkPos.y * chunkSize, 0);
     }
-    Vector2Int GetPlayerChunkPosition()
+    public Vector2Int GetPlayerChunkPosition()
     {
         Vector2 pos = player.position;
         int cx = Mathf.FloorToInt(pos.x / chunkSize);
