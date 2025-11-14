@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using TMPro;
+using Unity.Collections;
 using UnityEngine;
 
 public class StatManager : MonoBehaviour
@@ -12,31 +14,45 @@ public class StatManager : MonoBehaviour
     [SerializeField] WorldService worldService;
     [SerializeField] Blockdictionary Blockdictionary;
     WorldMetaData WorldMetaData;
+
+    [SerializeField] Color red;
+    [SerializeField] Color green;
+    [SerializeField] Color blue;
+    [SerializeField] Color yellow;
+    [SerializeField] Color cyan;
+    [SerializeField] Color magenta;
+    [SerializeField] Color white;
+    [SerializeField] Color black;
+    Color rainbow;
+    [SerializeField] float speedOfRainbow;
+    struct colorSTR
+    {
+        string name;
+        Color color;
+    }
+
     private void LateUpdate()
     {
         if (WorldMetaData == null)
         {
             WorldMetaData = worldService.GetWorldMetaData(worldManager.WorldId);
         }
-    }
-    void Update()
-    {
         Vector2Int BlockCusor = playerManager.BlockCursor, chunkCursor = playerManager.ChunkCursor, blockCursorRelative = playerManager.BlockRelativeToChunk;
 
+        float hue = Mathf.Repeat(Time.time * speedOfRainbow, 1f);
+        rainbow = Color.HSVToRGB(hue, 1f, 1f);
+
         statText.text =
-            addColour(Color.cyan, "World Name: ") + WorldMetaData.worldName + "\n" +
-            addColour(Color.cyan, "World Id: ") + WorldMetaData.worldName + "\n" +
-            addColour(Color.cyan, "Seed: ") + WorldMetaData.seed + "\n" +
-            addColour(Color.cyan, "Player Position: ") + playerManager.transform.position + "\n" +
-            addColour(Color.cyan, "Chunck At: ") + worldManager.CurrentPlayerChunk + "\n" +
-            addColour(Color.cyan, "Cursor At : ") + BlockCusor + "\n" +
-            addColour(Color.cyan, "Block: ") + Blockdictionary.tiles[worldManager.getBlockOfChunk(chunkCursor, blockCursorRelative)].name + "\n"
-
-
+            addColour(yellow, "World Name: ") + WorldMetaData.worldName + "\n" +
+            addColour(yellow, "Seed: ") + WorldMetaData.seed + "\n" +
+            addColour(red, "Player Position: ") + playerManager.transform.position + "\n" +
+            addColour(red, "Chunck At: ") + worldManager.CurrentPlayerChunk + "\n" +
+            addColour(blue, "Cursor At : ") + BlockCusor + "\n" +
+            addColour(blue, "Block: ") + Blockdictionary.tiles[worldManager.getBlockOfChunk(chunkCursor, blockCursorRelative)].name + "\n" +
+            addColour(blue, "Block In Hand: ") + Blockdictionary.tiles[playerManager.SelectedBlockIndex].name + "\n" + 
+            addColour(rainbow, "   Astral Pix V0.1")
             ;
-
     }
-
     string addColour(Color color, string text)
     {
         return "<color=#" + ColorUtility.ToHtmlStringRGBA(color) + ">" + text + "</color>";

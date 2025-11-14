@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
     Camera mainCam;
     Rigidbody2D rb2D;
     [SerializeField] WorldManager worldManager;
+    [SerializeField] Blockdictionary blocks;
     [SerializeField] InputSystem_Actions controls;
     InputAction interactAction;
 
@@ -55,6 +56,11 @@ public class PlayerScript : MonoBehaviour
     public Vector2Int ChunkCursor => chunkCursor;
 
     public Vector2Int BlockRelativeToChunk => blockRelativeToChunk;
+
+    int selectedBlockIndex = 0;
+    public int SelectedBlockIndex => selectedBlockIndex;
+    int maxBlockTypes; 
+
     [SerializeField] float mouseDistance;
     [SerializeField] Vector2 moveInput;
     bool isCrouching = false;
@@ -164,6 +170,7 @@ public class PlayerScript : MonoBehaviour
 
         leftArm.displacement = leftArm.pivot.localPosition - leftArm.handPivot.localPosition;
         rightArm.displacement = rightArm.pivot.localPosition - rightArm.handPivot.localPosition;
+        maxBlockTypes = blocks.tiles.Length;
     }
 
 
@@ -193,9 +200,23 @@ public class PlayerScript : MonoBehaviour
         MouseInput();
         mainCam.transform.position =new(transform.position.x, transform.position.y,-10);
 
+        if (Mouse.current.scroll.ReadValue().y != 0)
+        {
+            float scroll = Mouse.current.scroll.ReadValue().y;
+
+            if (scroll > 0)
+                selectedBlockIndex++;
+            else if (scroll < 0)
+                selectedBlockIndex--;
+
+            // Mantener el índice dentro de rango
+            if (selectedBlockIndex < 0) selectedBlockIndex = maxBlockTypes - 1;
+            if (selectedBlockIndex >= maxBlockTypes) selectedBlockIndex = 0;
+
+        }
         if (interactAction.IsPressed())
         {
-            worldManager.UpdateChunk(chunkCursor, blockRelativeToChunk, 0);
+            worldManager.UpdateChunk(chunkCursor, blockRelativeToChunk, selectedBlockIndex);
         }
 
         //---------------
@@ -400,8 +421,8 @@ public class PlayerScript : MonoBehaviour
         mousePosition = mainCam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, mainCam.nearClipPlane));
         
         blockCursor = new(Mathf.FloorToInt(mousePosition.x), Mathf.FloorToInt(mousePosition.y));
-        chunkCursor = new(Mathf.FloorToInt((float)blockCursor.x/ Chunk.chunkSize), Mathf.FloorToInt((float)blockCursor.y / Chunk.chunkSize));
-        blockRelativeToChunk = blockCursor - chunkCursor * Chunk.chunkSize;
+        chunkCursor = new(Mathf.FloorToInt((float)blockCursor.x/ ChunkManager.chunkSize), Mathf.FloorToInt((float)blockCursor.y / ChunkManager.chunkSize));
+        blockRelativeToChunk = blockCursor - chunkCursor * ChunkManager.chunkSize;
 
 
         Vector2 direction = mousePosition - (Vector2)anglePivot.transform.position;

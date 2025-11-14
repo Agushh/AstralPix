@@ -2538,7 +2538,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ClassicAstralPixFont Material
-  m_Shader: {fileID: 4800000, guid: 128e987d567d4e2c824d754223b3f3b0, type: 3}
+  m_Shader: {fileID: 4800000, guid: 48bb5f55d8670e349b6e614913f9d910, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -2558,7 +2558,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 8845567322094704927}
+        m_Texture: {fileID: 2800000, guid: de31e5e577c867f49ba4ab60572feb65, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -2567,6 +2567,7 @@ Material:
     - _CullMode: 0
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
+    - _Padding: 0
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0

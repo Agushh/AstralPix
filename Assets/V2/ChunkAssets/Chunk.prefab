@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7b1e464c0e8ca394bbd333936369c860, type: 2}
+  - {fileID: 2100000, guid: 5dae77067589db84488c86e91fc26944, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee372017215924140974e9a91a4c2051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chunk
-  timeIntervalToSave: 100
+  blockdictionary: {fileID: 11400000, guid: 270d6ac461b40cb43afb9da91901b5b9, type: 2}
 --- !u!60 &6338498353600459251
 PolygonCollider2D:
   m_ObjectHideFlags: 0

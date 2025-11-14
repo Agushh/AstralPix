@@ -4,11 +4,14 @@ using UnityEngine;
 public class WorldMetaData
 {
     public string worldName;
-    public long seed;
+    public float seed;
+    public Vector2 spawnPosition;
+    public Vector2 lastPlayerPosition;
 
-    public WorldMetaData(string worldName, long seed)
+    public WorldMetaData(string worldName, float seed, Vector2 spawnPosition, Vector2 lastPlayerPosition)
     {
         this.worldName = worldName;
         this.seed = seed;
+        this.lastPlayerPosition = lastPlayerPosition;
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WorldManager : MonoBehaviour
@@ -13,9 +14,11 @@ public class WorldManager : MonoBehaviour
     [Header("Chunk Settings")]
     [SerializeField] private int loadRadius = 1;
 
-    private Dictionary<Vector2Int, Chunk> activeChunks = new();
+    private Dictionary<Vector2Int, ChunkManager> activeChunks = new();
 
     private Dictionary<Vector2Int, ChunkData> cacheChunkData = new();
+    
+    private Dictionary<Vector2Int, List<(Vector2Int localPos, Color color)>> pendingLight = new();
 
     private Vector2Int lastPlayerChunk;
     private Vector2Int currentPlayerChunk;
@@ -41,7 +44,17 @@ public class WorldManager : MonoBehaviour
 
     void Start()
     {
-        UpdateLoadedChunks(GetPlayerChunkPosition());
+        UpdateLoadedChunks(new(0,0)); 
+        if (worldMD.lastPlayerPosition != Vector2.zero)
+        {
+            player.transform.position = worldMD.lastPlayerPosition;
+        }
+        if (worldMD.spawnPosition == Vector2.zero)
+        {
+            Vector2 spawnPosition = GetSpawnPosition();
+            worldMD.spawnPosition = spawnPosition;
+            player.transform.position = worldMD.spawnPosition;
+        }
     }
 
     private void Update()
@@ -64,6 +77,30 @@ public class WorldManager : MonoBehaviour
 
     }
 
+    Vector2 GetSpawnPosition()
+    {
+        Vector2 SpawnPos = Vector2.zero;
+        foreach (ChunkManager chunk in activeChunks.Values)
+        {
+            int i = 0;
+            int j = 0;
+            while (i < chunkSize)
+            {
+                for(j = 0; j < chunkSize; j++)
+                {
+                    if (getBlockOfChunk(chunk.Position, new(j, i)) == 0) break;
+                }
+                if(j < chunkSize) break;
+                i++;
+            }
+            if (i < chunkSize)
+            {
+                SpawnPos = new(i, j);
+                break;
+            }
+        }
+        return SpawnPos;
+    }
     void LoadWorld(string worldName)
     {
         worldMD = worldService.GetWorldMetaData(worldName);
@@ -87,31 +124,93 @@ public class WorldManager : MonoBehaviour
         return data.getBlockMatrix()[position.x, position.y];
     }
 
+    public bool sendLight(Vector2Int pos, Vector2Int chunkPos, Color color)
+    {
+        Vector2Int neighbourChunkPos = new(chunkPos.x, chunkPos.y);
+        if (pos.x < 0)
+        {
+            neighbourChunkPos.x -= 1;
+        }
+        else if (pos.x >= chunkSize)
+        {
+            neighbourChunkPos.x += 1;
+        }
+        if (pos.y < 0)
+        {
+            neighbourChunkPos.y -= 1;
+        }
+        else if (pos.y >= chunkSize)
+        {
+            neighbourChunkPos.y += 1;
+        }
+        Vector2Int normalPosition = AdjustCoordinates(pos);
+
+        if (activeChunks.TryGetValue(neighbourChunkPos, out var chunk))
+        {
+            return chunk.ReceiveExternalLight(normalPosition, color);
+        }
+        else
+        {
+            if (!pendingLight.ContainsKey(neighbourChunkPos))
+                pendingLight[neighbourChunkPos] = new();
+
+            pendingLight[neighbourChunkPos].Add((normalPosition, color));
+            return true;
+        }
+    }
+
+    public void deleteLight(Vector2Int pos, Vector2Int chunkPos)
+    {
+        Vector2Int neighbourChunkPos = new(chunkPos.x, chunkPos.y);
+        if (pos.x < 0)
+        {
+            neighbourChunkPos.x -= 1;
+        }
+        else if (pos.x >= chunkSize)
+        {
+            neighbourChunkPos.x += 1;
+        }
+        if (pos.y < 0)
+        {
+            neighbourChunkPos.y -= 1;
+        }
+        else if (pos.y >= chunkSize)
+        {
+            neighbourChunkPos.y += 1;
+        }
+        Vector2Int normalPosition = AdjustCoordinates(pos);
+        
+        if (activeChunks.TryGetValue(neighbourChunkPos, out var chunk))
+        {
+            if(chunk != null)
+                chunk.deleteExternalLight(normalPosition);
+        }
+
+    }
+
     #region Runtime functions
     void UpdateLoadedChunks(Vector2Int playerChunk)
     {
         // --- 1. Cargar nuevos chunks y marcar los que se quedan ---
         HashSet<Vector2Int> toKeep = new();
 
-        for (int i = -loadRadius; i <= loadRadius; i++) // FIX: <=
+        for (int i = -loadRadius; i <= loadRadius; i++) 
         {
-            for (int j = -loadRadius; j <= loadRadius; j++) // FIX: <=
+            for (int j = -loadRadius; j <= loadRadius; j++)
             {
-                // FIX: Calcular posición relativa al jugador
                 Vector2Int chunkPos = new Vector2Int(playerChunk.x + i, playerChunk.y + j);
                 toKeep.Add(chunkPos); // Marcar para MANTENER
 
                 if (!activeChunks.ContainsKey(chunkPos))
                 {
-                    // Este chunk no está cargado, así que hay que cargarlo
                     ChunkData data = LoadChunkData(chunkPos, worldMD);
-                    Chunk chunk = SpawnChunk(chunkPos, data);
+                    ChunkManager chunk = SpawnChunk(chunkPos, data);
                     activeChunks.Add(chunkPos, chunk);
                 }
             }
         }
 
-        // --- 2. Descargar chunks viejos (forma segura) ---
+        //Descargar chunks viejos (forma segura) ---
         List<Vector2Int> toRemove = new List<Vector2Int>();
         foreach (Vector2Int pos in activeChunks.Keys)
         {
@@ -123,15 +222,17 @@ public class WorldManager : MonoBehaviour
 
         foreach (Vector2Int pos in toRemove)
         {
-            if (activeChunks[pos].IsDirty) SaveChunk(activeChunks[pos]);
+            ChunkData updatedData;
+            cacheChunkData.TryGetValue(pos, out updatedData);
+            if (activeChunks[pos].IsDirty) updatedData = SaveChunk(activeChunks[pos]);
 
             Destroy(activeChunks[pos].gameObject); // Destruir el GameObject
             activeChunks.Remove(pos); // Quitar del diccionario
-            cacheChunkData.Remove(pos); // Quitar del caché
+            cacheChunkData[pos] = updatedData; // Actualizar cache
         }
     }
 
-    //GENERATES OR LOAD A CACHE OF THE 8 ADJACENT CHUNKS
+    //GENERATES OR LOAD A CACHE OF THE 8 ADJACENT CHUNKSDATAS
     private ChunkData LoadChunkData(Vector2Int pos, WorldMetaData wmd) 
     {
         ChunkData chunkData;
@@ -157,14 +258,22 @@ public class WorldManager : MonoBehaviour
         return chunkData;
     }
 
-    Chunk SpawnChunk(Vector2Int chunkPos, ChunkData chunkData)
+    ChunkManager SpawnChunk(Vector2Int chunkPos, ChunkData chunkData)
     {
         GameObject obj = Instantiate(chunkPrefab, ChunkToWorldPos(chunkPos), Quaternion.identity, transform);
-        Chunk chunk = obj.GetComponent<Chunk>();
+        ChunkManager chunk = obj.GetComponent<ChunkManager>();
 
         chunk.name = $"Chunk {chunkPos.x},{chunkPos.y}";
-        chunk.SetData(chunkPos, worldMD, this, chunkData); 
-
+        chunk.SetData(chunkPos, worldMD, this, chunkData);
+        if (pendingLight.TryGetValue(chunkPos, out var list))
+        {
+            var copy = new List<(Vector2Int localPos, Color color)>(list);
+            foreach (var (localPos, color) in copy)
+            {
+                chunk.ReceiveExternalLight(localPos, color);
+            }
+            pendingLight.Remove(chunkPos);
+        }
         return chunk;
     }
     #endregion
@@ -207,16 +316,19 @@ public class WorldManager : MonoBehaviour
 
     void SaveWorld()
     {
-        foreach(Chunk chunk in activeChunks.Values)
+        foreach(ChunkManager chunk in activeChunks.Values)
         {
             SaveChunk(chunk);
         }
+        worldMD.lastPlayerPosition = player.transform.position;
+        worldService.SaveWorldMetaData(worldMD);
     }
 
-    public void SaveChunk(Chunk chunk)
+    public ChunkData SaveChunk(ChunkManager chunk)
     {
         ChunkData data = new(chunk.Position, chunk.Blocks, chunk.Collisions);
         worldService.saveChunk(data, worldMD);
+        return data;
     }
 
     private void OnApplicationQuit()
@@ -243,6 +355,18 @@ public class WorldManager : MonoBehaviour
         return $"{pos.x}_{pos.y}";
     }
 
+    static Vector2Int AdjustCoordinates(Vector2Int position)
+    {
+        int x = position.x;
+        int y = position.y;
 
+        if (x >= chunkSize) x -= chunkSize;
+        else if (x < 0) x += chunkSize;
+
+        if (y >= chunkSize) y -= chunkSize;
+        else if (y < 0) y += chunkSize;
+
+        return new Vector2Int(x, y);
+    }
     #endregion
 }
