@@ -2,12 +2,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(PolygonCollider2D))]
 public class ChunkManager : MonoBehaviour
 {
+
+
+
     public static int chunkSize = 32;
 
     MeshFilter meshFilter;
@@ -28,11 +32,25 @@ public class ChunkManager : MonoBehaviour
 
     //Lightining
     List<Vector2> uvs2 = new(); // RealWorldUvs Position
-    Queue<Vector2Int> emmiters = new();
-    HashSet<Vector2Int> externalEmmiters = new();
-    Dictionary<Vector2Int, List<Vector2Int>> externalRelation = new();
-    const float DECAY = 0.5f;         // caída por bloque (10%)
-    const float THRESHOLD = 0.05f;    // debajo de esto, se considera 0
+
+    List<(Vector2Int pos, Color color)> lights = new();
+    private Color[,] finalLightMap = new Color[chunkSize, chunkSize];
+    List<(Vector2Int pos, Color color)> receivedLight = new();
+    HashSet<Vector2Int> receivedPositions = new();
+
+    List<(Vector2Int pos, Color color)> upExternalLights = new();
+    List<(Vector2Int pos, Color color)> downExternalLights = new();
+    List<(Vector2Int pos, Color color)> rightExternalLights = new();
+    List<(Vector2Int pos, Color color)> leftExternalLights = new();
+
+    public List<(Vector2Int pos, Color color)> UpExternalLights => upExternalLights;
+    public List<(Vector2Int pos, Color color)> DownExternalLights => downExternalLights;
+    public List<(Vector2Int pos, Color color)> RightExternalLights => rightExternalLights;
+    public List<(Vector2Int pos, Color color)> LeftExternalLights => leftExternalLights;
+
+
+    const int maxRadius = 6;
+    const float falloffPower = 1.5f;
 
 
     //Collision data
@@ -46,7 +64,6 @@ public class ChunkManager : MonoBehaviour
     //ChunkData
     private Vector2Int position;
     private int[,] blocks;
-    private Color[,] lightMap = new Color[chunkSize,chunkSize];
 
     private bool isDirty = false; // Modification Flag
     public Vector2Int Position => position;
@@ -91,9 +108,8 @@ public class ChunkManager : MonoBehaviour
     }
     private void Update()
     {
-        if(dirtyLight)
+        if (dirtyLight)
         {
-
             CalculateLightning();
             dirtyLight = false;
         }
@@ -318,107 +334,134 @@ public class ChunkManager : MonoBehaviour
     #region Lightning
     void CalculateLightning()
     {
-        emmiters.Clear();
+        lights.Clear();
+        upExternalLights.Clear();
+        downExternalLights.Clear();
+        rightExternalLights.Clear();
+        leftExternalLights.Clear();
+        receivedLight.Clear();
+
+        receivedLight = worldManager.getLightsForChunk(position);
+
         for (int x = 0; x < chunkSize; x++)
         {
-            for(int y = 0; y < chunkSize; y++)
+            for (int y = 0; y < chunkSize; y++)
             {
                 if (getBlockData(x, y).EmitLight)
                 {
-                    lightMap[x, y] = getBlockData(x, y).lightColor;
-                    emmiters.Enqueue(new Vector2Int(x, y));
+                    lights.Add((new Vector2Int(x, y), getBlockData(x, y).lightColor));
                 }
-                else if(!externalEmmiters.Contains(new Vector2Int(x, y)))
-                    lightMap[x, y] = Color.black;
+                finalLightMap[x, y] = Color.black;
             }
         }
 
-        // Cola local para BFS (usá una lista o cola ya declarada)
-        Queue<Vector2Int> q = new Queue<Vector2Int>();
-
-        // Inicial: encolá todos los emisores que ya estén en emmiters
-        foreach (var e in externalEmmiters)
+        foreach(var light in receivedLight)
         {
-            // sanity check
-            if (e.x < 0 || e.y < 0 || e.x >= chunkSize || e.y >= chunkSize) continue;
-            q.Enqueue(e);
+            lights.Add(light);
+            receivedPositions.Add(light.pos);
         }
-        while (emmiters.Count > 0)
-        {
-            var e = emmiters.Dequeue();
-            // sanity check
-            if (e.x < 0 || e.y < 0 || e.x >= chunkSize || e.y >= chunkSize) continue;
-            q.Enqueue(e);
-        }
-        while (q.Count > 0)
-        {
-            Vector2Int pos = q.Dequeue();
-            Color currentColor = lightMap[pos.x, pos.y];
 
-            // si current es muy débil, saltear, es decir una luz inicial muy debil, que no aguantaria ni un ciclo.
-            if (MaxComponent(currentColor) < THRESHOLD)
+        foreach (var light in lights)
+        {
+            int minX = Mathf.Max(0, light.pos.x - maxRadius);
+            int maxX = Mathf.Min(chunkSize - 1, light.pos.x + maxRadius);
+            int minY = Mathf.Max(0, light.pos.y - maxRadius);
+            int maxY = Mathf.Min(chunkSize - 1, light.pos.y + maxRadius);
+
+            if (light.pos.x - maxRadius < 0 && !receivedPositions.Contains(light.pos)) //send light interactionn
             {
-                continue;
+                Vector2Int localForNeighbor = new Vector2Int(
+                    light.pos.x + chunkSize,
+                    light.pos.y
+                    );
+                leftExternalLights.Add((localForNeighbor, light.color));
+            }
+            else if (light.pos.x + maxRadius >= chunkSize && !receivedPositions.Contains(light.pos))
+            {
+                Vector2Int localForNeighbor = new Vector2Int(
+                    light.pos.x - chunkSize,
+                    light.pos.y
+                    );
+                rightExternalLights.Add((localForNeighbor, light.color));
             }
 
-            foreach (Vector2Int n in Neighbors4(pos.x, pos.y))
+            if (light.pos.y - maxRadius < 0 && !receivedPositions.Contains(light.pos))
             {
-                Color proposed = currentColor * (1f - DECAY);
-                if (n.x < 0 || n.y < 0 || n.x >= chunkSize || n.y >= chunkSize)
-                {
-                    //delegate to world manager
-                    //save a List that contains every neighbour tile that a tile interact with, because when it is deleted, it has to notify all of them.
-                    externalRelation.TryGetValue(pos, out var list);
-                    if (list == null || list.Count == 0)
-                    {
-                        list = new() { n };
-                    }
-                    else if(!list.Contains(n))
-                    {
-                        list.Add(n);
-                    }
-                    bool loaded = worldManager.sendLight(n, position, proposed);
-                    externalRelation[pos] = list;
-                    continue;
-                }
+                Vector2Int localForNeighbor = new Vector2Int(
+                    light.pos.x ,
+                    light.pos.y + chunkSize
+                    );
+                downExternalLights.Add((localForNeighbor, light.color));
+            }
+            else if (light.pos.y + maxRadius >= chunkSize && !receivedPositions.Contains(light.pos))
+            {
+                Vector2Int localForNeighbor = new Vector2Int(
+                    light.pos.x ,
+                    light.pos.y - chunkSize
+                    );
+                upExternalLights.Add((localForNeighbor, light.color));
+            }
 
-                if (blocks[n.x, n.y] == 0) continue;
-                if (MaxComponent(proposed) < THRESHOLD)
+            for (int x = minX; x <= maxX; x++)
+            {
+                for (int y = minY; y <= maxY; y++)
                 {
-                    continue;
-                }
-                
-                if (MaxComponent(proposed) > MaxComponent(lightMap[n.x, n.y]))
-                {
-                    lightMap[n.x, n.y] = CombineColors(lightMap[n.x, n.y], proposed);
-                    q.Enqueue(new Vector2Int(n.x, n.y));
+                    if (blocks[x, y] == 0)
+                    {
+                        finalLightMap[x, y] = Color.white;
+                        continue;
+                    }
+                    // 4. Calcular la distancia (Euclidiana)
+                    float distance = Vector2.Distance(light.pos, new Vector2(x, y));
+
+                    // Si está fuera del radio, no aporta luz
+                    if (distance > maxRadius)
+                    {
+                        continue;
+                    }
+
+                    // 5. Calcular la atenuación
+                    // Un falloff lineal simple: 1.0 en el centro, 0.0 en el borde
+                    float attenuation = 1.0f - (distance / maxRadius);
+
+                    // (Opcional) Aplicar una curva de falloff (cuadrática, etc.)
+                    attenuation = Mathf.Pow(attenuation, falloffPower);
+
+                    // 6. Calcular la contribución de esta luz
+                    Color lightContribution = light.color * attenuation;
+
+                    // 7. MEZCLAR 
+                    finalLightMap[x, y] = CombineColors(finalLightMap[x, y], lightContribution);
                 }
             }
         }
 
         UpdateLightTextureFromLightMap();
     }
-
+    Color CombineColors(Color existing, Color incoming)
+    {
+        Color e = existing.linear;
+        Color i = incoming.linear;
+        Color result = e + i;
+        return result.gamma;
+    }
     void UpdateLightTextureFromLightMap()
     {
         int paddedSize = chunkSize + 2;
-        Texture2D lightTex = new Texture2D(paddedSize, paddedSize, TextureFormat.RGBA32, false, true);
-        lightTex.filterMode = FilterMode.Bilinear;
-        lightTex.wrapMode = TextureWrapMode.Clamp;
+        Texture2D lightTexture = new Texture2D(paddedSize, paddedSize, TextureFormat.RGBA32, false, true);
+        lightTexture.filterMode = FilterMode.Bilinear;
+        lightTexture.wrapMode = TextureWrapMode.Clamp;
         Color32[] pixels = new Color32[paddedSize * paddedSize];
         for (int y = 0; y < chunkSize; y++)
         {
             for (int x = 0; x < chunkSize; x++)
             {
-                Color c = lightMap[x, y];
-                c.r = Mathf.Min(c.r, 1f);
-                c.g = Mathf.Min(c.g, 1f);
-                c.b = Mathf.Min(c.b, 1f);
+                Color c = finalLightMap[x, y];
                 pixels[(y + 1) * paddedSize + (x + 1)] = (Color32)c;
             }
         }
         // Copiar bordes (padding de 1 píxel)
-         // Top y bottom
+        // Top y bottom
         for (int x = 0; x < chunkSize; x++)
         {
             pixels[0 * paddedSize + (x + 1)] = pixels[1 * paddedSize + (x + 1)];                               // fila superior
@@ -432,53 +475,9 @@ public class ChunkManager : MonoBehaviour
             pixels[y * paddedSize + (paddedSize - 1)] = pixels[y * paddedSize + (paddedSize - 2)]; // columna derecha
         }
 
-        lightTex.SetPixels32(pixels);
-        lightTex.Apply(false); // false para no generar mipmaps
-        meshRenderer.material.SetTexture("_LightTex", lightTex);
-    }
-
-    float MaxComponent(Color c) => Mathf.Max(c.r, Mathf.Max(c.g, c.b));
-
-    IEnumerable<Vector2Int> Neighbors4(int x, int y)
-    {
-        yield return new Vector2Int(x + 1, y);
-        yield return new Vector2Int(x - 1, y);
-        yield return new Vector2Int(x, y + 1);
-        yield return new Vector2Int(x, y - 1);
-    }
-    Color CombineColors(Color existing, Color incoming)
-    {
-        float blend = 0.5f;
-        return new Color(
-            Mathf.Lerp(existing.r, incoming.r, blend),
-            Mathf.Lerp(existing.g, incoming.g, blend),
-            Mathf.Lerp(existing.b, incoming.b, blend)
-        );
-    }
-
-    //Neighbour comunication
-
-    public bool ReceiveExternalLight(Vector2Int localPos, Color incoming)
-    {
-        // si la luz entrante supera el existente, actualizá y encolá para procesar
-        if (MaxComponent(incoming) > MaxComponent(lightMap[localPos.x, localPos.y]))
-        {
-            lightMap[localPos.x, localPos.y] = incoming;
-            externalEmmiters.Add(localPos);
-            dirtyLight = true;
-            return true;
-        }
-        return false;
-    }
-    public void deleteExternalLight(Vector2Int localPos)
-    {
-        if (getBlockData(localPos.x, localPos.y).EmitLight)
-            lightMap[localPos.x, localPos.y] = getBlockData(localPos.x, localPos.y).lightColor;
-        else
-            lightMap[localPos.x, localPos.y] = Color.black;
-
-        externalEmmiters.Remove(localPos);
-        dirtyLight = true;
+        lightTexture.SetPixels32(pixels);
+        lightTexture.Apply(false); // false para no generar mipmaps
+        meshRenderer.material.SetTexture("_LightTex", lightTexture);
     }
 
     #endregion
@@ -488,7 +487,6 @@ public class ChunkManager : MonoBehaviour
     {
         GenerateMesh();
         GenerateCollider();
-        dirtyLight = true;
     }
     public bool PlaceBlock(Vector2Int pos, int newBlock)
     {
@@ -499,22 +497,22 @@ public class ChunkManager : MonoBehaviour
             return false;
 
         // Colocar aire en aire o colocar bloque donde ya hay un bloque.
-        if (current != 0 && newBlock != 0 || current == 0 && newBlock == 0) return false;
+        if ((current != 0 && newBlock != 0) ||( current == 0 && newBlock == 0)) return false;
         
-        if(externalRelation.ContainsKey(pos) && externalRelation[pos] != null && externalRelation[pos].Count > 0)
-        {
-            foreach (var external in externalRelation[pos])
-            {
-                worldManager.deleteLight(external, position);
-            }
-        }
-
         isDirty = true;
         blocks[pos.x, pos.y] = newBlock;
         UpdateChunk();
+
+        //Light Check
+
+        worldManager.NotifyNeighborsForLightRefresh(position);
+        dirtyLight = true;
         return true;
     }
-
+    public void ForceLightRefresh()
+    {
+        dirtyLight = true;
+    }
     #endregion
 
     #region Interactions I/O
@@ -580,6 +578,5 @@ public class ChunkManager : MonoBehaviour
     {
         return blockdictionary.tiles[blocks[x, y]];
     }
-
     #endregion
 }

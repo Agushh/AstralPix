@@ -10,6 +10,7 @@ public struct tileData
     public float hardness; // 0 instant break, -1 unbreakable, 1,2,3,4 = hardness level.
     public bool EmitLight; 
     public Color lightColor;
+    public bool ConectedTextures;
     public string flag; //for future uses like water or platforms.
 }
 
@@ -78,7 +79,7 @@ public class Blockdictionary : ScriptableObject
         "x10111x0",
         "0111x0x1"
     };
-    
+
     int totalRelations = 46;
 
     struct Pattern
@@ -165,8 +166,8 @@ public class Blockdictionary : ScriptableObject
     #endregion
 
     #region Runtime Functions
-    
-    
+
+
     /// <summary>
     /// Busqueda de UVs en el atlas segun el bloque y su relacion con los vecinos
     /// </summary>
@@ -175,7 +176,7 @@ public class Blockdictionary : ScriptableObject
     /// <returns></returns>
     public Vector2[] GetTileUVs(int blockID, byte relation)
     {
-        if (blockID < 0 || blockID >= tiles.Length)
+        if (blockID < 0 || blockID >= tiles.Length || tiles[blockID].ConectedTextures == false)
         {
             return DefaultUV(blockID);
         }

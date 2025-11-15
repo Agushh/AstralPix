@@ -17,8 +17,8 @@ public class WorldManager : MonoBehaviour
     private Dictionary<Vector2Int, ChunkManager> activeChunks = new();
 
     private Dictionary<Vector2Int, ChunkData> cacheChunkData = new();
-    
-    private Dictionary<Vector2Int, List<(Vector2Int localPos, Color color)>> pendingLight = new();
+
+    private Dictionary<Vector2Int, List<Vector2Int>> pendingLightUpdate = new();
 
     private Vector2Int lastPlayerChunk;
     private Vector2Int currentPlayerChunk;
@@ -76,7 +76,6 @@ public class WorldManager : MonoBehaviour
         }
 
     }
-
     Vector2 GetSpawnPosition()
     {
         Vector2 SpawnPos = Vector2.zero;
@@ -124,70 +123,8 @@ public class WorldManager : MonoBehaviour
         return data.getBlockMatrix()[position.x, position.y];
     }
 
-    public bool sendLight(Vector2Int pos, Vector2Int chunkPos, Color color)
-    {
-        Vector2Int neighbourChunkPos = new(chunkPos.x, chunkPos.y);
-        if (pos.x < 0)
-        {
-            neighbourChunkPos.x -= 1;
-        }
-        else if (pos.x >= chunkSize)
-        {
-            neighbourChunkPos.x += 1;
-        }
-        if (pos.y < 0)
-        {
-            neighbourChunkPos.y -= 1;
-        }
-        else if (pos.y >= chunkSize)
-        {
-            neighbourChunkPos.y += 1;
-        }
-        Vector2Int normalPosition = AdjustCoordinates(pos);
-
-        if (activeChunks.TryGetValue(neighbourChunkPos, out var chunk))
-        {
-            return chunk.ReceiveExternalLight(normalPosition, color);
-        }
-        else
-        {
-            if (!pendingLight.ContainsKey(neighbourChunkPos))
-                pendingLight[neighbourChunkPos] = new();
-
-            pendingLight[neighbourChunkPos].Add((normalPosition, color));
-            return true;
-        }
-    }
-
-    public void deleteLight(Vector2Int pos, Vector2Int chunkPos)
-    {
-        Vector2Int neighbourChunkPos = new(chunkPos.x, chunkPos.y);
-        if (pos.x < 0)
-        {
-            neighbourChunkPos.x -= 1;
-        }
-        else if (pos.x >= chunkSize)
-        {
-            neighbourChunkPos.x += 1;
-        }
-        if (pos.y < 0)
-        {
-            neighbourChunkPos.y -= 1;
-        }
-        else if (pos.y >= chunkSize)
-        {
-            neighbourChunkPos.y += 1;
-        }
-        Vector2Int normalPosition = AdjustCoordinates(pos);
-        
-        if (activeChunks.TryGetValue(neighbourChunkPos, out var chunk))
-        {
-            if(chunk != null)
-                chunk.deleteExternalLight(normalPosition);
-        }
-
-    }
-
+    
+   
     #region Runtime functions
     void UpdateLoadedChunks(Vector2Int playerChunk)
     {
@@ -265,19 +202,77 @@ public class WorldManager : MonoBehaviour
 
         chunk.name = $"Chunk {chunkPos.x},{chunkPos.y}";
         chunk.SetData(chunkPos, worldMD, this, chunkData);
-        if (pendingLight.TryGetValue(chunkPos, out var list))
+
+        //Actualizacion de luces : 
+        if (pendingLightUpdate.TryGetValue(chunkPos, out var dependents))
         {
-            var copy = new List<(Vector2Int localPos, Color color)>(list);
-            foreach (var (localPos, color) in copy)
+            foreach (var dep in dependents)
             {
-                chunk.ReceiveExternalLight(localPos, color);
+                if (activeChunks.TryGetValue(dep, out var depChunk))
+                {
+                    depChunk.ForceLightRefresh();
+                }
             }
-            pendingLight.Remove(chunkPos);
+            pendingLightUpdate.Remove(chunkPos);
         }
+
         return chunk;
     }
     #endregion
-    
+
+    public List<(Vector2Int pos, Color color)> getLightsForChunk(Vector2Int chunkPos)
+    {
+        List<(Vector2Int pos, Color color)> output = new();
+
+        TryRegisterAndCollect(chunkPos, new Vector2Int(chunkPos.x - 1, chunkPos.y), ref output, side: "Right");
+        TryRegisterAndCollect(chunkPos, new Vector2Int(chunkPos.x + 1, chunkPos.y), ref output, side: "Left");
+        TryRegisterAndCollect(chunkPos, new Vector2Int(chunkPos.x, chunkPos.y - 1), ref output, side: "Up");
+        TryRegisterAndCollect(chunkPos, new Vector2Int(chunkPos.x, chunkPos.y + 1), ref output, side: "Down");
+
+        return output;
+    }
+    private void TryRegisterAndCollect(Vector2Int requesterChunk,Vector2Int targetChunk, ref List<(Vector2Int pos, Color color)> collected, string side)
+    {
+        if (activeChunks.TryGetValue(targetChunk, out var chunk))
+        {
+            // El chunk está cargado -> devolvemos sus luces normalmente
+            switch (side)
+            {
+                case "Right": collected.AddRange(chunk.RightExternalLights); break;
+                case "Left": collected.AddRange(chunk.LeftExternalLights); break;
+                case "Up": collected.AddRange(chunk.UpExternalLights); break;
+                case "Down": collected.AddRange(chunk.DownExternalLights); break;
+            }
+            return;
+        }
+
+        // El chunk NO está cargado -> registrar dependencia
+        if (!pendingLightUpdate.ContainsKey(targetChunk))
+            pendingLightUpdate[targetChunk] = new List<Vector2Int>();
+
+        // Agregar chunk que depende de este
+        if (!pendingLightUpdate[targetChunk].Contains(requesterChunk))
+            pendingLightUpdate[targetChunk].Add(requesterChunk);
+    }
+    public void NotifyNeighborsForLightRefresh(Vector2Int chunkPos)
+    {
+        // izquierda
+        if (activeChunks.TryGetValue(new Vector2Int(chunkPos.x - 1, chunkPos.y), out var left))
+            left.ForceLightRefresh();
+
+        // derecha
+        if (activeChunks.TryGetValue(new Vector2Int(chunkPos.x + 1, chunkPos.y), out var right))
+            right.ForceLightRefresh();
+
+        // abajo
+        if (activeChunks.TryGetValue(new Vector2Int(chunkPos.x, chunkPos.y - 1), out var down))
+            down.ForceLightRefresh();
+
+        // arriba
+        if (activeChunks.TryGetValue(new Vector2Int(chunkPos.x, chunkPos.y + 1), out var up))
+            up.ForceLightRefresh();
+    }
+
     public void UpdateChunk(Vector2Int chunkPos, Vector2Int cursor, int newBlock)
     {
         if (!activeChunks.ContainsKey(chunkPos))

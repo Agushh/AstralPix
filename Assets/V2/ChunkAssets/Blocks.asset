@@ -20,28 +20,82 @@ MonoBehaviour:
     hardness: 0
     EmitLight: 1
     lightColor: {r: 1, g: 1, b: 1, a: 1}
+    ConectedTextures: 0
     flag: 
   - name: Dirt
     id: 1
     hardness: 0
     EmitLight: 0
     lightColor: {r: 0, g: 0, b: 0, a: 0}
+    ConectedTextures: 1
     flag: 
   - name: Grass
     id: 2
     hardness: 0
     EmitLight: 0
     lightColor: {r: 0, g: 0, b: 0, a: 0}
+    ConectedTextures: 1
     flag: 
   - name: Stone
     id: 3
     hardness: 0
     EmitLight: 0
     lightColor: {r: 0, g: 0, b: 0, a: 0}
+    ConectedTextures: 1
     flag: 
   - name: Wood
     id: 4
     hardness: 0
+    EmitLight: 0
+    lightColor: {r: 0, g: 0, b: 0, a: 0}
+    ConectedTextures: 1
+    flag: 
+  - name: Torch
+    id: 5
+    hardness: 0
+    EmitLight: 1
+    lightColor: {r: 1, g: 0.6347193, b: 0, a: 1}
+    ConectedTextures: 1
+    flag: 
+  - name: LightBlock
+    id: 6
+    hardness: 0
     EmitLight: 1
     lightColor: {r: 1, g: 0, b: 0, a: 1}
+    ConectedTextures: 0
+    flag: 
+  - name: Stone 2
+    id: 7
+    hardness: 0
+    EmitLight: 0
+    lightColor: {r: 1, g: 1, b: 1, a: 1}
+    ConectedTextures: 1
+    flag: 
+  - name: White Stone
+    id: 8
+    hardness: 0
+    EmitLight: 1
+    lightColor: {r: 1, g: 1, b: 1, a: 1}
+    ConectedTextures: 1
+    flag: 
+  - name: Brick
+    id: 9
+    hardness: 0
+    EmitLight: 0
+    lightColor: {r: 1, g: 0, b: 0, a: 1}
+    ConectedTextures: 1
+    flag: 
+  - name: Stone Pillar
+    id: 10
+    hardness: 0
+    EmitLight: 0
+    lightColor: {r: 1, g: 1, b: 1, a: 1}
+    ConectedTextures: 1
+    flag: 
+  - name: Wood Log
+    id: 11
+    hardness: 0
+    EmitLight: 0
+    lightColor: {r: 1, g: 1, b: 1, a: 1}
+    ConectedTextures: 1
     flag: 
