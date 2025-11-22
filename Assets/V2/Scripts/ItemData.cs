@@ -1,4 +1,7 @@
+using UnityEditor;
 using UnityEngine;
+using static UnityEditor.Progress;
+using static UnityEngine.GraphicsBuffer;
 
 [CreateAssetMenu(fileName = "ItemData", menuName = "Scriptable Objects/ItemData")]
 public class ItemData : ScriptableObject
