@@ -68,7 +68,7 @@ public class WorldService : MonoBehaviour
             {
                 if (y + chunkSize * position.y < fractalNoiseHeight[x]- 7)
                     chunk[x, y] = 3;
-                else if (y + chunkSize * position.y < fractalNoiseHeight[x] - 2)
+                else if (y + chunkSize * position.y < fractalNoiseHeight[x] - 1)
                     chunk[x, y] = 1;
                 else if (y + chunkSize * position.y < fractalNoiseHeight[x])
                     chunk[x, y] = 2;

@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee372017215924140974e9a91a4c2051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chunk
-  blockdictionary: {fileID: 11400000, guid: 270d6ac461b40cb43afb9da91901b5b9, type: 2}
+  tileConfig: {fileID: 11400000, guid: 44816bf79e560c44c8dc0f8ca6433ee0, type: 2}
 --- !u!60 &6338498353600459251
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ PolygonCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_CompositeOperation: 1
+  m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:

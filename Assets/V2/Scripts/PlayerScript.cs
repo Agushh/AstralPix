@@ -15,7 +15,7 @@ public class PlayerScript : MonoBehaviour
     Camera mainCam;
     Rigidbody2D rb2D;
     [SerializeField] WorldManager worldManager;
-    [SerializeField] Blockdictionary blocks;
+    [SerializeField] TileConfig blocks;
     [SerializeField] InputSystem_Actions controls;
     InputAction interactAction;
 
@@ -170,7 +170,7 @@ public class PlayerScript : MonoBehaviour
 
         leftArm.displacement = leftArm.pivot.localPosition - leftArm.handPivot.localPosition;
         rightArm.displacement = rightArm.pivot.localPosition - rightArm.handPivot.localPosition;
-        maxBlockTypes = blocks.tiles.Length;
+        maxBlockTypes = blocks.Tiles.Length;
     }
 
 
@@ -216,7 +216,7 @@ public class PlayerScript : MonoBehaviour
         }
         if (interactAction.IsPressed())
         {
-            worldManager.UpdateChunk(chunkCursor, blockRelativeToChunk, selectedBlockIndex);
+            worldManager.PlaceBlock(chunkCursor, blockRelativeToChunk, selectedBlockIndex);
         }
 
         //---------------

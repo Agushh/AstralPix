@@ -12,7 +12,7 @@ public class StatManager : MonoBehaviour
     [SerializeField] WorldManager worldManager;
     [SerializeField] PlayerScript playerManager;
     [SerializeField] WorldService worldService;
-    [SerializeField] Blockdictionary Blockdictionary;
+    [SerializeField] TileConfig tileConfig;
     WorldMetaData WorldMetaData;
 
     [SerializeField] Color red;
@@ -48,8 +48,8 @@ public class StatManager : MonoBehaviour
             addColour(red, "Player Position: ") + playerManager.transform.position + "\n" +
             addColour(red, "Chunck At: ") + worldManager.CurrentPlayerChunk + "\n" +
             addColour(blue, "Cursor At : ") + BlockCusor + "\n" +
-            addColour(blue, "Block: ") + Blockdictionary.tiles[worldManager.getBlockOfChunk(chunkCursor, blockCursorRelative)].name + "\n" +
-            addColour(blue, "Block In Hand: ") + Blockdictionary.tiles[playerManager.SelectedBlockIndex].name + "\n" + 
+            addColour(blue, "Block: ") + tileConfig.Tiles[worldManager.getBlockOfChunk(chunkCursor, blockCursorRelative)].name + "\n" +
+            addColour(blue, "Block In Hand: ") + tileConfig.Tiles[playerManager.SelectedBlockIndex].name + "\n" + 
             addColour(rainbow, "   Astral Pix V0.1")
             ;
     }
