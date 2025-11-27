@@ -13,26 +13,44 @@ public class ChunkData
 
     public int[] blocks;
 
+    public int[] backBlocks;
+
+    public int[] surfaceHeight;
+
     public List<Vector2[]> colliderPaths;
 
+    public bool isAir;
 
     public int[,] getBlockMatrix()
     {
         return VecToMat(blocks, 32, 32);
     }
-
+    public int getBlock(int x, int y ,bool isFrontBlock)
+    {
+        return isFrontBlock ? blocks[x + y * 32] : backBlocks[x + y * 32];
+    }
+    public int[,] getBackBlocksMatrix()
+    {
+        return VecToMat(backBlocks, 32, 32);
+    }
 
     // --  METHODS  --  
-    public ChunkData(Vector2Int pos, int[,] blockArray)
+    public ChunkData(Vector2Int pos, int[,] blockArray, int[,] backBlocks, int[] surfaceHeight, bool isAir)
     {
         positionKey = $"{pos.x}_{pos.y}";
         blocks = MatToVec(blockArray);
+        this.backBlocks = MatToVec(backBlocks);
+        this.surfaceHeight = surfaceHeight;
+        this.isAir = isAir;
     }
-    public ChunkData(Vector2Int pos, int[,] blockArray, List<Vector2[]> collider)
+    public ChunkData(Vector2Int pos, int[,] blockArray, int[,] backBlocks, List<Vector2[]> collider, int[] surfaceHeight, bool isAir)
     {
         positionKey = $"{pos.x}_{pos.y}";
         blocks = MatToVec(blockArray);
         colliderPaths = collider;
+        this.backBlocks = MatToVec(backBlocks);
+        this.surfaceHeight = surfaceHeight;
+        this.isAir = isAir;
     }
 
     public Vector2Int GetPosition()

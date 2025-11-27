@@ -24,6 +24,14 @@ MonoBehaviour:
     hardness: 0
     zOffset: -1e+33
     lightColor: {r: 1, g: 1, b: 1, a: 1}
+  - name: Null
+    description: 
+    isSolid: 1
+    tileType: 0
+    variations: 5
+    hardness: 0
+    zOffset: -1000
+    lightColor: {r: 0, g: 0, b: 0, a: 1}
   - name: dirt
     description: 
     isSolid: 1
@@ -56,11 +64,75 @@ MonoBehaviour:
     hardness: 0
     zOffset: 3
     lightColor: {r: 0, g: 0, b: 0, a: 1}
-  - name: Null
+  - name: StoneBrick
     description: 
     isSolid: 1
     tileType: 0
     variations: 5
     hardness: 0
-    zOffset: 2
+    zOffset: 4
+    lightColor: {r: 0, g: 0, b: 0, a: 1}
+  - name: Gravel
+    description: 
+    isSolid: 1
+    tileType: 0
+    variations: 5
+    hardness: 0
+    zOffset: 5
+    lightColor: {r: 0, g: 0, b: 0, a: 1}
+  - name: Sand
+    description: 
+    isSolid: 1
+    tileType: 0
+    variations: 5
+    hardness: 0
+    zOffset: 6
+    lightColor: {r: 0, g: 0, b: 0, a: 1}
+  - name: Torch
+    description: 
+    isSolid: 0
+    tileType: 0
+    variations: 1
+    hardness: 0
+    zOffset: -10000
+    lightColor: {r: 0.9528302, g: 0.9051622, b: 0.81350124, a: 1}
+  - name: GreenTorch
+    description: 
+    isSolid: 0
+    tileType: 0
+    variations: 1
+    hardness: 0
+    zOffset: -10000
+    lightColor: {r: 0, g: 1, b: 0, a: 1}
+  - name: RedTorch
+    description: 
+    isSolid: 0
+    tileType: 0
+    variations: 1
+    hardness: 0
+    zOffset: -10000
+    lightColor: {r: 1, g: 0, b: 0, a: 1}
+  - name: BlueTorch
+    description: 
+    isSolid: 0
+    tileType: 0
+    variations: 1
+    hardness: 0
+    zOffset: -10000
+    lightColor: {r: 0, g: 0, b: 1, a: 1}
+  - name: Smooth White
+    description: 
+    isSolid: 1
+    tileType: 0
+    variations: 5
+    hardness: 0
+    zOffset: 7
+    lightColor: {r: 0, g: 0, b: 0, a: 1}
+  - name: Glass
+    description: 
+    isSolid: 0
+    tileType: 0
+    variations: 5
+    hardness: 0
+    zOffset: 8
     lightColor: {r: 0, g: 0, b: 0, a: 1}

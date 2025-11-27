@@ -89,7 +89,7 @@ public class WorldManager : MonoBehaviour
             {
                 for(j = 0; j < chunkSize; j++)
                 {
-                    if (getBlockOfChunk(chunk.Position, new(j, i)) == 0) break;
+                    if (getBlockOfChunk(chunk.Position, new(j, i), true) == 0) break;
                 }
                 if(j < chunkSize) break;
                 i++;
@@ -107,21 +107,21 @@ public class WorldManager : MonoBehaviour
         worldMD = worldService.GetWorldMetaData(worldName);
     }
 
-    public int getBlockOfChunk(Vector2Int neighChunk, Vector2Int position)
+    public int getBlockOfChunk(Vector2Int neighChunk, Vector2Int position, bool isFrontBlock)
     {
         // Caso 1: El chunk está activo y cargado. Perfecto.
         if (activeChunks.TryGetValue(neighChunk, out var chunk))
         {
-            return chunk.GetBlockAtPosition(position);
+            return chunk.GetBlockAtPosition(position, isFrontBlock);
         }
 
         // Caso 2: El chunk NO está activo.
-        // NO DEVUELVAS 0. Carga los datos del disco y busca el bloque.
+        // Carga los datos del disco y busca el bloque.
         ChunkData data = cacheChunkData.ContainsKey(neighChunk) ? cacheChunkData[neighChunk] : LoadChunkData(neighChunk, worldMD);
 
 
         // Devuelve el bloque correcto desde los datos del chunk
-        return data.getBlockMatrix()[position.x, position.y];
+        return data.getBlock(position.x, position.y, isFrontBlock);
     }
 
     
@@ -130,6 +130,7 @@ public class WorldManager : MonoBehaviour
     {
         // --- 1. Cargar nuevos chunks y marcar los que se quedan ---
         HashSet<Vector2Int> toKeep = new();
+        HashSet<Vector2Int> newChunks = new();
 
         for (int i = -loadRadius; i <= loadRadius; i++) 
         {
@@ -143,11 +144,13 @@ public class WorldManager : MonoBehaviour
                     ChunkData data = LoadChunkData(chunkPos, worldMD);
                     ChunkManager chunk = SpawnChunk(chunkPos, data);
                     activeChunks.Add(chunkPos, chunk);
+
+                    //For load light in only one call for all the new chunks
+                    newChunks.Add(chunkPos);
                 }
             }
         }
-
-        //Descargar chunks viejos (forma segura) ---
+        //Descargar chunks viejos (forma segura) --- Two Steps ---
         List<Vector2Int> toRemove = new List<Vector2Int>();
         foreach (Vector2Int pos in activeChunks.Keys)
         {
@@ -156,7 +159,6 @@ public class WorldManager : MonoBehaviour
                 toRemove.Add(pos);
             }
         }
-
         foreach (Vector2Int pos in toRemove)
         {
             ChunkData updatedData;
@@ -169,6 +171,7 @@ public class WorldManager : MonoBehaviour
         }
 
         lightingManager.SetRenderedChunks(activeChunks);
+        lightingManager.UpdateLight(newChunks);
     }
 
     //GENERATES OR LOAD A CACHE OF THE 8 ADJACENT CHUNKSDATAS
@@ -209,7 +212,7 @@ public class WorldManager : MonoBehaviour
     }
     #endregion
 
-    public void PlaceBlock(Vector2Int chunkPos, Vector2Int cursor, int newBlock)
+    public void PlaceBlock(Vector2Int chunkPos, Vector2Int cursor, int newBlock, bool isFront)
     {
         if (!activeChunks.ContainsKey(chunkPos))
         {
@@ -217,9 +220,10 @@ public class WorldManager : MonoBehaviour
             return;
         }
         //Place block
-        activeChunks[chunkPos].PlaceBlock(cursor, newBlock);
+        activeChunks[chunkPos].PlaceBlock(cursor, newBlock, isFront);
 
-        lightingManager.MarkDirty();
+
+        lightingManager.UpdateLight(chunkPos);
 
         //Update neighboring chunks if the interaction was on edge
         if (cursor.x == 0)
@@ -273,7 +277,7 @@ public class WorldManager : MonoBehaviour
 
     public ChunkData SaveChunk(ChunkManager chunk)
     {
-        ChunkData data = new(chunk.Position, chunk.Blocks, chunk.Collisions);
+        ChunkData data = new(chunk.Position, chunk.Blocks, chunk.BackBlocks, chunk.Collisions, chunk.SurfaceHeight, chunk.isAir);
         worldService.saveChunk(data, worldMD);
         return data;
     }

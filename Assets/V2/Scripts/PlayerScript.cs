@@ -18,6 +18,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] TileConfig blocks;
     [SerializeField] InputSystem_Actions controls;
     InputAction interactAction;
+    InputAction leftClick;
+    InputAction rightClick;
 
     #region Animation
     [Header("Animation : ")]
@@ -147,6 +149,8 @@ public class PlayerScript : MonoBehaviour
         controls.Player.Crouch.canceled += ctx => isCrouching = false;
 
         interactAction = controls.FindAction("interact");
+        leftClick = controls.FindAction("LeftMouseButton");
+        rightClick = controls.FindAction("RightMouseButton");
 
         cc2D = GetComponent<CapsuleCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
@@ -210,13 +214,22 @@ public class PlayerScript : MonoBehaviour
                 selectedBlockIndex--;
 
             // Mantener el índice dentro de rango
-            if (selectedBlockIndex < 0) selectedBlockIndex = maxBlockTypes - 1;
-            if (selectedBlockIndex >= maxBlockTypes) selectedBlockIndex = 0;
+            if (selectedBlockIndex < 1) selectedBlockIndex = maxBlockTypes - 1;
+            if (selectedBlockIndex >= maxBlockTypes) selectedBlockIndex = 1;
 
         }
+        bool isFront = false;
         if (interactAction.IsPressed())
         {
-            worldManager.PlaceBlock(chunkCursor, blockRelativeToChunk, selectedBlockIndex);
+            isFront = true;
+        }
+        if (rightClick.IsPressed())
+        {
+            worldManager.PlaceBlock(chunkCursor, blockRelativeToChunk, selectedBlockIndex, isFront);
+        }
+        if(leftClick.IsPressed())
+        {
+            worldManager.PlaceBlock(chunkCursor, blockRelativeToChunk, 0, isFront);
         }
 
         //---------------

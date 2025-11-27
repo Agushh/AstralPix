@@ -48,7 +48,7 @@ public class StatManager : MonoBehaviour
             addColour(red, "Player Position: ") + playerManager.transform.position + "\n" +
             addColour(red, "Chunck At: ") + worldManager.CurrentPlayerChunk + "\n" +
             addColour(blue, "Cursor At : ") + BlockCusor + "\n" +
-            addColour(blue, "Block: ") + tileConfig.Tiles[worldManager.getBlockOfChunk(chunkCursor, blockCursorRelative)].name + "\n" +
+            addColour(blue, "Block: ") + tileConfig.Tiles[worldManager.getBlockOfChunk(chunkCursor, blockCursorRelative, true)].name + "\n" +
             addColour(blue, "Block In Hand: ") + tileConfig.Tiles[playerManager.SelectedBlockIndex].name + "\n" + 
             addColour(rainbow, "   Astral Pix V0.1")
             ;
