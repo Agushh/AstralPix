@@ -15,6 +15,15 @@ public enum TileType
 }
 
 [Serializable]
+public struct LightData
+{
+    public Color color;
+    public float intensity;
+    public float outerRadius;
+    public float innerRadius;
+}
+
+[Serializable]
 public struct tile
 {
     public string name;
@@ -25,7 +34,8 @@ public struct tile
     public int hardness;
     public float zOffset; //needs to be primary key but keep on float so it can be asigned without changing other ones
 
-    public Color lightColor;
+    public bool isLightEmitter;
+    public LightData lightData;
 }
 
 [CreateAssetMenu(fileName = "TileConfig", menuName = "Scriptable Objects/TileConfig")]

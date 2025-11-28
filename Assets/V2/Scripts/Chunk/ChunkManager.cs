@@ -93,6 +93,8 @@ public class ChunkManager : MonoBehaviour
 
         // Inicializacion de array de pixeles
         lightPixels = new Color32[paddedSize * paddedSize];
+
+        RenderLights();
     }
 
     #region Meshes
@@ -470,50 +472,99 @@ public class ChunkManager : MonoBehaviour
     #region Lighting
 
     // CACHÉ DE TEXTURA 
+
+
+
+    private Dictionary<Vector2, LightData> lights = new();
+    private Dictionary<Vector2, GameObject> lightsInstance = new();
+    [SerializeField] GameObject lightPrefab;
+
+    void RenderLights()
+    {
+        GetLights();
+
+        foreach (var light in lights)
+        {
+            if(!lightsInstance.ContainsKey(light.Key))
+            {
+                Vector2 position = new(light.Key.x + 0.5f, light.Key.y + 0.5f);
+                lightsInstance.Add(light.Key, Instantiate(lightPrefab, this.position * chunkSize + position, Quaternion.identity));
+                Light2D light2D = lightsInstance[light.Key].GetComponent<Light2D>();
+                light2D.intensity = light.Value.intensity;
+                light2D.color = light.Value.color;
+                light2D.pointLightInnerRadius = light.Value.innerRadius;
+                light2D.pointLightOuterRadius = light.Value.outerRadius;
+            }
+        }
+    }
+
+    void GetLights()
+    {
+        lights.Clear();
+
+        for (int i = 0; i < chunkSize; i++)
+        {
+            for (int j = 0; j < chunkSize; j++)
+            {
+                if (tileConfig.Tiles[blocks[i, j]].isLightEmitter) lights.Add(new Vector2(i, j), tileConfig.Tiles[blocks[i, j]].lightData);
+            }
+        }
+    }
+
+    void setLight(Vector2Int pos, LightData light)
+    {
+        if (lightsInstance.TryGetValue(pos, out GameObject instance))
+        {
+            Destroy(instance);
+            lightsInstance.Remove(pos);
+            lights.Remove(pos);
+        }
+        lights.Add(pos, light);
+
+
+        Vector2 position = new(pos.x + 0.5f, pos.y + 0.5f);
+        lightsInstance.Add(pos, Instantiate(lightPrefab, this.position * chunkSize + position, Quaternion.identity));
+        Light2D light2D = lightsInstance[pos].GetComponent<Light2D>();
+        light2D.intensity = light.intensity;
+        light2D.color = light.color;
+        light2D.pointLightInnerRadius = light.innerRadius;
+        light2D.pointLightOuterRadius = light.outerRadius;
+    }
+
+    void deleteLight(Vector2Int pos)
+    {
+        if (lightsInstance.TryGetValue(pos, out GameObject instance))
+        {
+            Destroy(instance);
+            lightsInstance.Remove(pos);
+            lights.Remove(pos);
+        }
+    }
+
+
     private Texture2D lightTexture;
     private Color32[] lightPixels;
-    public Queue<(Vector2Int pos, Color color)> getLightEmitters()
+    public Queue<(Vector2Int pos, float color)> getLightEmitters()
     {
-        Queue<(Vector2Int pos, Color color)> emitters = new();
+        Queue<(Vector2Int pos, float color)> emitters = new();
 
         int offsetX = position.x * chunkSize,
             offsetY = position.y * chunkSize;
 
-        bool sunLight;
-        if(isAir)
+        for (int i = 0; i < chunkSize; i++)
         {
-            for(int i = 0; i < chunkSize; i++)
+            for (int j = chunkSize - 1; j >= 0; j--)
             {
-                emitters.Enqueue((new(offsetX + i, offsetY), Color.white));
-                emitters.Enqueue((new(offsetX, offsetY + i ), Color.white));
-                emitters.Enqueue((new(offsetX + chunkSize, offsetY + i ), Color.white));
-                emitters.Enqueue((new(offsetX + i, offsetY + chunkSize), Color.white));
-            }
-
-        }
-        else
-        {
-            for (int i = 0; i < chunkSize; i++)
-            {
-                sunLight = true;
-                for (int j = chunkSize - 1; j >= 0; j--)
+                if (tileConfig.Tiles[blocks[i, j]].name == "air" && !tileConfig.Tiles[backBlocks[i, j]].isSolid)
                 {
-                    if (j + offsetY < surfaceHeight[i] - 10) sunLight = false;
-                    if ((tileConfig.Tiles[blocks[i, j]].lightColor == Color.white && !tileConfig.Tiles[backBlocks[i, j]].isSolid) ||
-                        (tileConfig.Tiles[blocks[i,j]].lightColor != Color.black && tileConfig.Tiles[blocks[i, j]].lightColor != Color.white) ||
-                        (sunLight && !tileConfig.Tiles[blocks[i, j]].isSolid))
-                    {
-                            emitters.Enqueue((new(offsetX + i, offsetY + j), tileConfig.Tiles[blocks[i, j]].lightColor));
-                    }
-                    else sunLight = false;
+                        emitters.Enqueue((new(offsetX + i, offsetY + j), 1f));
+                }
             }
         }
-        }
-        
         return emitters;
     }
 
-    public void UpdateLight(Color[,] lightMap, Color[] top, Color[] bottom, Color[] left, Color[] right)
+    public void UpdateLight(float[,] lightMap, float[] top, float[] bottom, float[] left, float[] right)
     {
         if (isAir) return;
         int paddedSize = chunkSize + 2;
@@ -521,7 +572,7 @@ public class ChunkManager : MonoBehaviour
         {
             for (int x = 0; x < chunkSize; x++)
             {
-                lightPixels[(y + 1) * paddedSize + (x + 1)] = (Color32)lightMap[x, y];
+                lightPixels[(y + 1) * paddedSize + (x + 1)] = new Color(lightMap[x, y], lightMap[x, y], lightMap[x, y], 1);
             }
         }
         // Copiar bordes (padding de 1 pixel)
@@ -529,7 +580,10 @@ public class ChunkManager : MonoBehaviour
         if (bottom != null)
         {
             for (int x = 0; x < chunkSize; x++)
-                lightPixels[x + 1] = bottom[x];
+            {
+                lightPixels[x + 1] = new Color(bottom[x], bottom[x], bottom[x], 1);
+
+            }
         }
         else // Fallback: Copiar mi propia fila inferior (clamp)
         {
@@ -543,7 +597,9 @@ public class ChunkManager : MonoBehaviour
             int rowStart = (paddedSize - 1) * paddedSize;
             int prevRowStart = (paddedSize - 2) * paddedSize;
             for (int x = 0; x < chunkSize; x++)
-                lightPixels[rowStart + (x + 1)] = top[x];
+            {
+                lightPixels[rowStart + (x + 1)] = new Color(top[x], top[x], top[x], 1);
+            }
         }
         else // Fallback
         {
@@ -557,7 +613,7 @@ public class ChunkManager : MonoBehaviour
         if (left != null)
         {
             for (int y = 0; y < chunkSize; y++)
-                lightPixels[(y + 1) * paddedSize] = left[y];
+                lightPixels[(y + 1) * paddedSize] = new Color(left[y], left[y], left[y], 1);
         }
         else // Fallback
         {
@@ -569,7 +625,7 @@ public class ChunkManager : MonoBehaviour
         if (right != null)
         {
             for (int y = 0; y < chunkSize; y++)
-                lightPixels[(y + 1) * paddedSize + (paddedSize - 1)] = right[y];
+                lightPixels[(y + 1) * paddedSize + (paddedSize - 1)] = new Color(right[y], right[y], right[y], 1);
         }
         else // Fallback
         {
@@ -618,6 +674,12 @@ public class ChunkManager : MonoBehaviour
             backBlocks[pos.x, pos.y] = newBlock;
 
         UpdateChunk();
+
+        if (tileConfig.Tiles[newBlock].isLightEmitter)
+            setLight(pos, tileConfig.Tiles[newBlock].lightData);
+        else if (tileConfig.Tiles[current].isLightEmitter)
+            deleteLight(pos);
+
 
         return true;
     }
@@ -668,6 +730,10 @@ public class ChunkManager : MonoBehaviour
         if (lightTexture != null)
         {
             Destroy(lightTexture);
+        }
+        foreach(var light in lightsInstance.Values)
+        {
+            Destroy(light);
         }
     }
 

@@ -23,7 +23,12 @@ MonoBehaviour:
     variations: 0
     hardness: 0
     zOffset: -1e+33
-    lightColor: {r: 1, g: 1, b: 1, a: 1}
+    isLightEmitter: 0
+    lightData:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      intensity: 0
+      outerRadius: 0
+      innerRadius: 0
   - name: Null
     description: 
     isSolid: 1
@@ -31,7 +36,12 @@ MonoBehaviour:
     variations: 5
     hardness: 0
     zOffset: -1000
-    lightColor: {r: 0, g: 0, b: 0, a: 1}
+    isLightEmitter: 0
+    lightData:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      intensity: 0
+      outerRadius: 0
+      innerRadius: 0
   - name: dirt
     description: 
     isSolid: 1
@@ -39,7 +49,12 @@ MonoBehaviour:
     variations: 5
     hardness: 0
     zOffset: 0
-    lightColor: {r: 0, g: 0, b: 0, a: 1}
+    isLightEmitter: 0
+    lightData:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      intensity: 0
+      outerRadius: 0
+      innerRadius: 0
   - name: grass
     description: 
     isSolid: 1
@@ -47,7 +62,12 @@ MonoBehaviour:
     variations: 5
     hardness: 0
     zOffset: 0
-    lightColor: {r: 0, g: 0, b: 0, a: 1}
+    isLightEmitter: 0
+    lightData:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      intensity: 0
+      outerRadius: 0
+      innerRadius: 0
   - name: cobblestone
     description: 
     isSolid: 1
@@ -55,7 +75,12 @@ MonoBehaviour:
     variations: 5
     hardness: 0
     zOffset: 1
-    lightColor: {r: 0, g: 0, b: 0, a: 1}
+    isLightEmitter: 0
+    lightData:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      intensity: 0
+      outerRadius: 0
+      innerRadius: 0
   - name: Wood
     description: 
     isSolid: 1
@@ -63,7 +88,12 @@ MonoBehaviour:
     variations: 5
     hardness: 0
     zOffset: 3
-    lightColor: {r: 0, g: 0, b: 0, a: 1}
+    isLightEmitter: 0
+    lightData:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      intensity: 0
+      outerRadius: 0
+      innerRadius: 0
   - name: StoneBrick
     description: 
     isSolid: 1
@@ -71,7 +101,12 @@ MonoBehaviour:
     variations: 5
     hardness: 0
     zOffset: 4
-    lightColor: {r: 0, g: 0, b: 0, a: 1}
+    isLightEmitter: 0
+    lightData:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      intensity: 0
+      outerRadius: 0
+      innerRadius: 0
   - name: Gravel
     description: 
     isSolid: 1
@@ -79,7 +114,12 @@ MonoBehaviour:
     variations: 5
     hardness: 0
     zOffset: 5
-    lightColor: {r: 0, g: 0, b: 0, a: 1}
+    isLightEmitter: 0
+    lightData:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      intensity: 0
+      outerRadius: 0
+      innerRadius: 0
   - name: Sand
     description: 
     isSolid: 1
@@ -87,7 +127,12 @@ MonoBehaviour:
     variations: 5
     hardness: 0
     zOffset: 6
-    lightColor: {r: 0, g: 0, b: 0, a: 1}
+    isLightEmitter: 0
+    lightData:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      intensity: 0
+      outerRadius: 0
+      innerRadius: 0
   - name: Torch
     description: 
     isSolid: 0
@@ -95,7 +140,12 @@ MonoBehaviour:
     variations: 1
     hardness: 0
     zOffset: -10000
-    lightColor: {r: 0.9528302, g: 0.9051622, b: 0.81350124, a: 1}
+    isLightEmitter: 1
+    lightData:
+      color: {r: 0.9150943, g: 0.7088088, b: 0.22877358, a: 1}
+      intensity: 1
+      outerRadius: 10
+      innerRadius: 1
   - name: GreenTorch
     description: 
     isSolid: 0
@@ -103,7 +153,12 @@ MonoBehaviour:
     variations: 1
     hardness: 0
     zOffset: -10000
-    lightColor: {r: 0, g: 1, b: 0, a: 1}
+    isLightEmitter: 1
+    lightData:
+      color: {r: 0.26389647, g: 0.9137255, b: 0.22745094, a: 1}
+      intensity: 1
+      outerRadius: 10
+      innerRadius: 1
   - name: RedTorch
     description: 
     isSolid: 0
@@ -111,7 +166,12 @@ MonoBehaviour:
     variations: 1
     hardness: 0
     zOffset: -10000
-    lightColor: {r: 1, g: 0, b: 0, a: 1}
+    isLightEmitter: 1
+    lightData:
+      color: {r: 0.9150943, g: 0.06474723, b: 0.16516119, a: 1}
+      intensity: 1
+      outerRadius: 10
+      innerRadius: 1
   - name: BlueTorch
     description: 
     isSolid: 0
@@ -119,7 +179,12 @@ MonoBehaviour:
     variations: 1
     hardness: 0
     zOffset: -10000
-    lightColor: {r: 0, g: 0, b: 1, a: 1}
+    isLightEmitter: 1
+    lightData:
+      color: {r: 0.22745094, g: 0.33711928, b: 0.9137255, a: 1}
+      intensity: 1
+      outerRadius: 10
+      innerRadius: 1
   - name: Smooth White
     description: 
     isSolid: 1
@@ -127,7 +192,12 @@ MonoBehaviour:
     variations: 5
     hardness: 0
     zOffset: 7
-    lightColor: {r: 0, g: 0, b: 0, a: 1}
+    isLightEmitter: 0
+    lightData:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      intensity: 0
+      outerRadius: 0
+      innerRadius: 0
   - name: Glass
     description: 
     isSolid: 0
@@ -135,4 +205,9 @@ MonoBehaviour:
     variations: 5
     hardness: 0
     zOffset: 8
-    lightColor: {r: 0, g: 0, b: 0, a: 1}
+    isLightEmitter: 0
+    lightData:
+      color: {r: 0, g: 0, b: 0, a: 0}
+      intensity: 0
+      outerRadius: 0
+      innerRadius: 0

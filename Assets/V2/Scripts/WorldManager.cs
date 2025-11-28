@@ -255,7 +255,7 @@ public class WorldManager : MonoBehaviour
 
     #region lighting
 
-    public void SendLightMap(Vector2Int chunkPos, Color[,] center, Color[] top, Color[] bottom, Color[] left, Color[] right)
+    public void SendLightMap(Vector2Int chunkPos, float[,] center, float[] top, float[] bottom, float[] left, float[] right)
     {
         if(activeChunks.TryGetValue(chunkPos, out var chunk))
         {
