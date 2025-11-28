@@ -223,7 +223,7 @@ public class ChunkLightingManager : MonoBehaviour
 
     Color ApplyDecay(Color c)
     {
-        return new Color(c.r - LIGHT_FALLOFF, c.g - LIGHT_FALLOFF, c.b - LIGHT_FALLOFF, c.a);
+        return new Color(c.r * LIGHT_FALLOFF, c.g * LIGHT_FALLOFF, c.b * LIGHT_FALLOFF, c.a);
     }
     private bool TryGetLight(Vector2Int globalPos, out Color color)
     {

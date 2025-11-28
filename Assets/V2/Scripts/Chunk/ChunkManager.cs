@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Build;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(PolygonCollider2D))]
@@ -18,6 +19,7 @@ public class ChunkManager : MonoBehaviour
 
     Color[,] LightMap = new Color[chunkSize, chunkSize];
 
+    [SerializeField]Light2D light2D;
 
     //ChunkData
     private Vector2Int position;
@@ -83,11 +85,11 @@ public class ChunkManager : MonoBehaviour
         lightTexture = new Texture2D(paddedSize, paddedSize, TextureFormat.RGBA32, false, true);
         lightTexture.filterMode = FilterMode.Bilinear;
         lightTexture.wrapMode = TextureWrapMode.Clamp;
-        meshRenderer.material.SetTexture("_LightTex", lightTexture);
+        //meshRenderer.material.SetTexture("_LightTex", lightTexture);
 
         BG_meshRenderer.material.SetFloat("_DarkenFactor", 0.3f);
 
-        BG_meshRenderer.material.SetTexture("_LightTex", lightTexture);
+        //BG_meshRenderer.material.SetTexture("_LightTex", lightTexture);
 
         // Inicializacion de array de pixeles
         lightPixels = new Color32[paddedSize * paddedSize];
@@ -583,7 +585,10 @@ public class ChunkManager : MonoBehaviour
 
         lightTexture.SetPixels32(lightPixels);
         lightTexture.Apply(false); // false para no generar mipmaps
-        meshRenderer.material.SetTexture("_LightTex", lightTexture);
+
+        Rect rect = new Rect(1, 1, chunkSize, chunkSize);
+        light2D.lightCookieSprite = Sprite.Create(lightTexture, rect, new(0, 0), 1);
+        //meshRenderer.material.SetTexture("_LightTex", lightTexture);
     }
 
     #endregion

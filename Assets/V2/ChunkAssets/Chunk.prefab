@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chunk
   tileConfig: {fileID: 11400000, guid: 44816bf79e560c44c8dc0f8ca6433ee0, type: 2}
+  light2D: {fileID: 1257326270975533856}
   isAir: 0
   BG_meshFilter: {fileID: 4866801488689307762}
   BG_meshRenderer: {fileID: 1726385424046625947}
