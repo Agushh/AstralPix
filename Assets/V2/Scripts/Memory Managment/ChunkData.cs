@@ -9,7 +9,7 @@ public class ChunkData
     //  --  DATA  --  
 
     //Serialization Key - ID
-    public string positionKey;
+    public int posX, posY;
 
     public int[] blocks;
 
@@ -21,45 +21,43 @@ public class ChunkData
 
     public bool isAir;
 
-    public int[,] getBlockMatrix()
-    {
-        return VecToMat(blocks, 32, 32);
-    }
-    public int getBlock(int x, int y ,bool isFrontBlock)
-    {
-        return isFrontBlock ? blocks[x + y * 32] : backBlocks[x + y * 32];
-    }
-    public int[,] getBackBlocksMatrix()
-    {
-        return VecToMat(backBlocks, 32, 32);
-    }
+    private const int CHUNK_SIZE = 32;
 
-    // --  METHODS  --  
-    public ChunkData(Vector2Int pos, int[,] blockArray, int[,] backBlocks, int[] surfaceHeight, bool isAir)
+    public ChunkData() { }
+
+    public ChunkData(Vector2Int pos, int[,] blockMatrix, int[,] backBlockMatrix, int[] surfaceHeight, bool isAir, List<Vector2[]> colliders = null)
     {
-        positionKey = $"{pos.x}_{pos.y}";
-        blocks = MatToVec(blockArray);
-        this.backBlocks = MatToVec(backBlocks);
+        posX = pos.x;
+        posY = pos.y;
+
+        // Aplanamos las matrices entrantes inmediatamente
+        blocks = MatToVec(blockMatrix);
+        backBlocks = MatToVec(backBlockMatrix);
+
         this.surfaceHeight = surfaceHeight;
         this.isAir = isAir;
-    }
-    public ChunkData(Vector2Int pos, int[,] blockArray, int[,] backBlocks, List<Vector2[]> collider, int[] surfaceHeight, bool isAir)
-    {
-        positionKey = $"{pos.x}_{pos.y}";
-        blocks = MatToVec(blockArray);
-        colliderPaths = collider;
-        this.backBlocks = MatToVec(backBlocks);
-        this.surfaceHeight = surfaceHeight;
-        this.isAir = isAir;
+        this.colliderPaths = colliders ?? new List<Vector2[]>();
     }
 
     public Vector2Int GetPosition()
     {
-        string[] parts = positionKey.Split('_');
-        return new Vector2Int(
-            int.Parse(parts[0]),
-            int.Parse(parts[1])
-        );
+        return new Vector2Int(posX, posY);
+    }
+
+    public int[,] GetBlockMatrix()
+    {
+        return VecToMat(blocks);
+    }
+
+    public int[,] GetBackBlocksMatrix()
+    {
+        return VecToMat(backBlocks);
+    }
+    public int GetBlock(int x, int y, bool isFrontBlock)
+    {
+        if (x < 0 || x >= CHUNK_SIZE || y < 0 || y >= CHUNK_SIZE) return 0; // Protección de límites
+        int index = x + (y * CHUNK_SIZE);
+        return isFrontBlock ? blocks[index] : backBlocks[index];
     }
 
     private int[] MatToVec(int[,] mat)
@@ -82,14 +80,14 @@ public class ChunkData
     }
 
 
-    private int[,] VecToMat(int[] vec, int width, int height)
+    private int[,] VecToMat(int[] vec)
     {
-        int[,] mat = new int[width, height];
+        int[,] mat = new int[CHUNK_SIZE, CHUNK_SIZE];
         int index = 0;
 
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < CHUNK_SIZE; y++)
         {
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < CHUNK_SIZE; x++)
             {
                 mat[x, y] = vec[index++];
             }

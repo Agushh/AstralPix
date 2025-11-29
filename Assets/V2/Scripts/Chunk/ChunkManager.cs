@@ -40,39 +40,10 @@ public class ChunkManager : MonoBehaviour
     private void Awake()
     {
         tileConfig = TileConfig.instance;
-    }
-
-    //"Constructor de chunk". Se utiliza al deserealizar, luego de instanciar, y se setean sus valores desde WorldManager.
-    public void SetData(Vector2Int index, WorldMetaData worldData, WorldManager worldManager, ChunkData cd)
-    {
-        position = index;
-        wmd = worldData;
-        this.worldManager = worldManager;
 
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
         polyCollider = GetComponent<PolygonCollider2D>();
-
-        blocks = cd.getBlockMatrix();
-        backBlocks = cd.getBackBlocksMatrix();
-        surfaceHeight = cd.surfaceHeight;
-        isAir = cd.isAir;
-
-
-        if (cd.colliderPaths != null && cd.colliderPaths.Count == 0)
-        {
-            collisions.AddRange(cd.colliderPaths);
-            polyCollider.pathCount = collisions.Count;
-            for (int i = 0; i < collisions.Count; i++)
-            {
-                polyCollider.SetPath(i, SimplifyPath(collisions[i].ToList()));
-            }
-        }
-        else
-        {
-            isDirty = true;
-            GenerateCollider();
-        }
 
         meshFilter.mesh = new Mesh();
         meshFilter.mesh.MarkDynamic();
@@ -81,10 +52,6 @@ public class ChunkManager : MonoBehaviour
 
         meshRenderer.sortingOrder = 1;
         BG_meshRenderer.sortingOrder = 0;
-
-
-        GenerateMesh();
-
 
         //lighting texture 
         int paddedSize = chunkSize + 2;
@@ -99,7 +66,38 @@ public class ChunkManager : MonoBehaviour
 
         // Inicializacion de array de pixeles
         lightPixels = new Color32[paddedSize * paddedSize];
-        
+    }
+    //"Constructor de chunk". Se utiliza al deserealizar, luego de instanciar, y se setean sus valores desde WorldManager.
+    public void SetData(Vector2Int index, WorldMetaData worldData, WorldManager worldManager, ChunkData cd)
+    {
+        position = index;
+        transform.position = new(position.x * 32, position.y * 32, 0);
+        wmd = worldData;
+        this.worldManager = worldManager;
+
+        blocks = cd.GetBlockMatrix();
+        backBlocks = cd.GetBackBlocksMatrix();
+        surfaceHeight = cd.surfaceHeight;
+        isAir = cd.isAir;
+
+
+        if (cd.colliderPaths != null && cd.colliderPaths.Count != 0)
+        {
+            collisions.AddRange(cd.colliderPaths);
+            polyCollider.pathCount = collisions.Count;
+            for (int i = 0; i < collisions.Count; i++)
+            {
+                polyCollider.SetPath(i, SimplifyPath(collisions[i].ToList()));
+            }
+        }
+        else
+        {
+            isDirty = true;
+            GenerateCollider();
+        }
+
+        GenerateMesh();
+
         GetLights();
         RenderLights();
     }

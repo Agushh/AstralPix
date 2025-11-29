@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class WorldManager : MonoBehaviour
 {
@@ -17,7 +19,8 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private int loadRadius = 1;
 
     private Dictionary<Vector2Int, ChunkManager> activeChunks = new();
-    
+
+    private Queue<GameObject> chunkPool = new();
 
     private Dictionary<Vector2Int, ChunkData> cacheChunkData = new();
 
@@ -121,7 +124,7 @@ public class WorldManager : MonoBehaviour
 
 
         // Devuelve el bloque correcto desde los datos del chunk
-        return data.getBlock(position.x, position.y, isFrontBlock);
+        return data.GetBlock(position.x, position.y, isFrontBlock);
     }
 
     
@@ -161,13 +164,7 @@ public class WorldManager : MonoBehaviour
         }
         foreach (Vector2Int pos in toRemove)
         {
-            ChunkData updatedData;
-            cacheChunkData.TryGetValue(pos, out updatedData);
-            if (activeChunks[pos].IsDirty) updatedData = SaveChunk(activeChunks[pos]);
-
-            Destroy(activeChunks[pos].gameObject); // Destruir el GameObject
-            activeChunks.Remove(pos); // Quitar del diccionario
-            cacheChunkData[pos] = updatedData; // Actualizar cache
+            RemoveChunk(pos);
         }
 
         lightingManager.SetRenderedChunks(activeChunks);
@@ -200,9 +197,31 @@ public class WorldManager : MonoBehaviour
         return chunkData;
     }
 
+    void RemoveChunk(Vector2Int pos)
+    {
+        ChunkData updatedData;
+        cacheChunkData.TryGetValue(pos, out updatedData);
+        if (activeChunks[pos].IsDirty) updatedData = SaveChunk(activeChunks[pos]);
+
+        chunkPool.Enqueue(activeChunks[pos].gameObject);
+        activeChunks[pos].gameObject.SetActive(false);
+        activeChunks.Remove(pos); // Quitar del diccionario
+        cacheChunkData[pos] = updatedData; // Actualizar cache
+    }
+
     ChunkManager SpawnChunk(Vector2Int chunkPos, ChunkData chunkData)
     {
-        GameObject obj = Instantiate(chunkPrefab, ChunkToWorldPos(chunkPos), Quaternion.identity, transform);
+        GameObject obj;
+        if (chunkPool.Count == 0)
+        {
+            obj = Instantiate(chunkPrefab, ChunkToWorldPos(chunkPos), Quaternion.identity, transform);
+        }
+        else
+        {
+            obj = chunkPool.Dequeue();
+            obj.SetActive(true);
+        }
+
         ChunkManager chunk = obj.GetComponent<ChunkManager>();
 
         chunk.name = $"Chunk {chunkPos.x},{chunkPos.y}";
@@ -280,7 +299,7 @@ public class WorldManager : MonoBehaviour
 
     public ChunkData SaveChunk(ChunkManager chunk)
     {
-        ChunkData data = new(chunk.Position, chunk.Blocks, chunk.BackBlocks, chunk.Collisions, chunk.SurfaceHeight, chunk.isAir);
+        ChunkData data = new(chunk.Position, chunk.Blocks, chunk.BackBlocks, chunk.SurfaceHeight, chunk.isAir, chunk.Collisions);
         worldService.saveChunk(data, worldMD);
         return data;
     }
