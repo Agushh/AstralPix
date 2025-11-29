@@ -440,7 +440,6 @@ GameObject:
   - component: {fileID: 396687239}
   - component: {fileID: 396687238}
   - component: {fileID: 396687244}
-  - component: {fileID: 396687241}
   - component: {fileID: 396687243}
   - component: {fileID: 396687242}
   m_Layer: 0
@@ -484,33 +483,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &396687241
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396687237}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &396687242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,7 +539,6 @@ MonoBehaviour:
   LIGHT_FALLOFF: 0.6
   LIGHT_THRESHOLD: 0.01
   worldManager: {fileID: 396687238}
-  tileConfig: {fileID: 11400000, guid: 44816bf79e560c44c8dc0f8ca6433ee0, type: 2}
 --- !u!1 &406999260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,7 +1274,6 @@ MonoBehaviour:
   worldManager: {fileID: 396687238}
   playerManager: {fileID: 1807793719}
   worldService: {fileID: 396687243}
-  tileConfig: {fileID: 11400000, guid: 44816bf79e560c44c8dc0f8ca6433ee0, type: 2}
   red: {r: 0.9056604, g: 0.37166253, b: 0.37166253, a: 1}
   green: {r: 0.40557134, g: 0.9245283, b: 0.4660466, a: 1}
   blue: {r: 0.5330188, g: 0.8237548, b: 1, a: 1}

@@ -11,9 +11,9 @@ public class ChunkManager : MonoBehaviour
     public static int chunkSize = 32;
 
 
-    [SerializeField] TileConfig tileConfig;    //Contains all of the information about blocks, interaction, uvs, light, etc. As tileconfig.tiles[x] as a tile Struct with the data 
+    static TileConfig tileConfig;    //(SINGLETON)Contains all of the information about blocks, interaction, uvs, light, etc. As tileconfig.tiles[x] as a tile Struct with the data 
 
-    WorldMetaData wmd;                         //Meta data of the world where is the chunk
+    static WorldMetaData wmd;                         //Meta data of the world where is the chunk
 
     WorldManager worldManager;                 //Father controller that insantiate and let interact with other chunks.
 
@@ -22,6 +22,7 @@ public class ChunkManager : MonoBehaviour
     [SerializeField]Light2D light2D;
 
     //ChunkData
+
     private Vector2Int position;
     public Vector2Int Position => position;
 
@@ -35,6 +36,11 @@ public class ChunkManager : MonoBehaviour
     public int[] SurfaceHeight => surfaceHeight;
 
     public bool isAir;
+
+    private void Awake()
+    {
+        tileConfig = TileConfig.instance;
+    }
 
     //"Constructor de chunk". Se utiliza al deserealizar, luego de instanciar, y se setean sus valores desde WorldManager.
     public void SetData(Vector2Int index, WorldMetaData worldData, WorldManager worldManager, ChunkData cd)
@@ -93,7 +99,8 @@ public class ChunkManager : MonoBehaviour
 
         // Inicializacion de array de pixeles
         lightPixels = new Color32[paddedSize * paddedSize];
-
+        
+        GetLights();
         RenderLights();
     }
 
@@ -125,19 +132,29 @@ public class ChunkManager : MonoBehaviour
 
     void GenerateMesh()
     {
-        vertices.Clear();
-        triangles.Clear();
-        uvs.Clear();
-        uvs2.Clear();
-        vertexIndex = 0;
-
-        BG_vertices.Clear();
-        BG_triangles.Clear();
-        BG_uvs.Clear();
-        BG_uvs2.Clear();
-        BG_vertexIndex = 0;
-
+        GenerateMesh(true);
+        GenerateMesh(false);
+    }
+    void GenerateMesh(bool frontTileMap)
+    {
         if (isAir) return;
+
+        if (frontTileMap)
+        {
+            vertices.Clear();
+            triangles.Clear();
+            uvs.Clear();
+            uvs2.Clear();
+            vertexIndex = 0;
+        }
+        else
+        {
+            BG_vertices.Clear();
+            BG_triangles.Clear();
+            BG_uvs.Clear();
+            BG_uvs2.Clear();
+            BG_vertexIndex = 0;
+        }
 
         // --- PASO 1: GENERAR BASES ---
         // Se dibujan por detras de los bordes.
@@ -145,10 +162,16 @@ public class ChunkManager : MonoBehaviour
         {
             for (int x = 0; x < chunkSize; x++)
             {
-                int blockID = blocks[x, y];
-                int BackgroundID = backBlocks[x, y];
-                if (BackgroundID != 0) GenerateQuad(BG_vertices, BG_triangles, BG_uvs, BG_uvs2, ref BG_vertexIndex,x, y, 1, 1, 1, BackgroundID, "base");
-                if (blockID != 0 ) GenerateQuad(vertices, triangles, uvs, uvs2, ref vertexIndex, x, y, 1, 1, 1f, blockID, "base");
+                if(frontTileMap)
+                {
+                    int blockID = blocks[x, y];
+                    if (blockID != 0) GenerateQuad(vertices, triangles, uvs, uvs2, ref vertexIndex, x, y, 1, 1, 1f, blockID, "base");
+                }
+                else
+                {
+                    int BackgroundID = backBlocks[x, y];
+                    if (BackgroundID != 0) GenerateQuad(BG_vertices, BG_triangles, BG_uvs, BG_uvs2, ref BG_vertexIndex, x, y, 1, 1, 1, BackgroundID, "base");
+                }
 
             }
         }
@@ -165,7 +188,7 @@ public class ChunkManager : MonoBehaviour
                 if (blockID != 0) GenerateEdges(vertices, triangles, uvs, uvs2, ref vertexIndex, x, y, blockID, 0, true);
             }
         }
-        SetMesh();
+        SetMesh(frontTileMap);
     }
 
     void GenerateEdges(List<Vector3> verts, List<int> trings, List<Vector2> targetUvs1, List<Vector2> targetUvs2, ref int vIndex, int x, int y, int blockID, float z, bool ifFrontBlock)
@@ -259,8 +282,6 @@ public class ChunkManager : MonoBehaviour
             }
         }
     }
-
-
     void GenerateQuad(List<Vector3> verts, List<int> trings, List<Vector2> targetUvs1, List<Vector2> targetUvs2, ref int vIndex, float x, float y, float xSize, float ySize, float z, int id, string relation)
     {
         // Agregamos Z a los vértices
@@ -304,26 +325,31 @@ public class ChunkManager : MonoBehaviour
 
         vIndex += 4;
     }
-    void SetMesh()
+    
+    void SetMesh(bool isFront)
     {
-        meshFilter.mesh.Clear();
-        meshFilter.mesh.SetVertices(vertices.ToArray());
-        meshFilter.mesh.SetTriangles(triangles.ToArray(), 0);
-        meshFilter.mesh.SetUVs(0, uvs.ToArray());
-        meshFilter.mesh.SetUVs(1, uvs2.ToArray());
+        if(isFront)
+        {
+            meshFilter.mesh.Clear();
+            meshFilter.mesh.SetVertices(vertices.ToArray());
+            meshFilter.mesh.SetTriangles(triangles.ToArray(), 0);
+            meshFilter.mesh.SetUVs(0, uvs.ToArray());
+            meshFilter.mesh.SetUVs(1, uvs2.ToArray());
 
-        meshFilter.mesh.RecalculateNormals();
-        meshFilter.mesh.RecalculateBounds();
+            meshFilter.mesh.RecalculateNormals();
+            meshFilter.mesh.RecalculateBounds();
+        }
+        else
+        {
+            BG_meshFilter.mesh.Clear();
+            BG_meshFilter.mesh.SetVertices(BG_vertices.ToArray());
+            BG_meshFilter.mesh.SetTriangles(BG_triangles.ToArray(), 0);
+            BG_meshFilter.mesh.SetUVs(0, BG_uvs.ToArray());
+            BG_meshFilter.mesh.SetUVs(1, BG_uvs2.ToArray());
 
-        //Background mesh
-        BG_meshFilter.mesh.Clear();
-        BG_meshFilter.mesh.SetVertices(BG_vertices.ToArray());
-        BG_meshFilter.mesh.SetTriangles(BG_triangles.ToArray(), 0);
-        BG_meshFilter.mesh.SetUVs(0, BG_uvs.ToArray());
-        BG_meshFilter.mesh.SetUVs(1, BG_uvs2.ToArray());
-
-        BG_meshFilter.mesh.RecalculateNormals();
-        BG_meshFilter.mesh.RecalculateBounds();
+            BG_meshFilter.mesh.RecalculateNormals();
+            BG_meshFilter.mesh.RecalculateBounds();
+        }
     }
 
     #endregion
@@ -472,17 +498,22 @@ public class ChunkManager : MonoBehaviour
     #region Lighting
 
     // CACHÉ DE TEXTURA 
-
-
-
     private Dictionary<Vector2, LightData> lights = new();
     private Dictionary<Vector2, GameObject> lightsInstance = new();
+
+    private Texture2D lightTexture;
+    private Color32[] lightPixels;
+
+    #region Unity2DLights
+
     [SerializeField] GameObject lightPrefab;
 
+    /// <summary>
+    /// Render all the Lights 2D gameObject in Scene for each light loaded on the list of lights.
+    /// Only called when loading the chunk.
+    /// </summary>
     void RenderLights()
     {
-        GetLights();
-
         foreach (var light in lights)
         {
             if(!lightsInstance.ContainsKey(light.Key))
@@ -498,6 +529,10 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loading Chunk procedure.
+    /// Load all lights from the chunk into the lights dictionary.
+    /// </summary>
     void GetLights()
     {
         lights.Clear();
@@ -511,7 +546,13 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
-    void setLight(Vector2Int pos, LightData light)
+    /// <summary>
+    /// individual Light Addition with check for existing lights on the same position.
+    /// Realize the change if there was a light before.
+    /// </summary>
+    /// <param name="pos">new Light Position</param>
+    /// <param name="light">LightData struct of the new light</param>
+    void addLight(Vector2Int pos, LightData light)
     {
         if (lightsInstance.TryGetValue(pos, out GameObject instance))
         {
@@ -531,6 +572,10 @@ public class ChunkManager : MonoBehaviour
         light2D.pointLightOuterRadius = light.outerRadius;
     }
 
+    /// <summary>
+    /// Individual Light Deletion.
+    /// </summary>
+    /// <param name="pos">position of the light to delete</param>
     void deleteLight(Vector2Int pos)
     {
         if (lightsInstance.TryGetValue(pos, out GameObject instance))
@@ -540,10 +585,8 @@ public class ChunkManager : MonoBehaviour
             lights.Remove(pos);
         }
     }
+    #endregion
 
-
-    private Texture2D lightTexture;
-    private Color32[] lightPixels;
     public Queue<(Vector2Int pos, float color)> getLightEmitters()
     {
         Queue<(Vector2Int pos, float color)> emitters = new();
@@ -564,6 +607,15 @@ public class ChunkManager : MonoBehaviour
         return emitters;
     }
 
+    /// <summary>
+    /// When called, updates the lightmap texture of the chunk.
+    /// Generates the GrayScale Light, and set it to the _lightTex of the material.
+    /// </summary>
+    /// <param name="lightMap"></param>
+    /// <param name="top"></param>
+    /// <param name="bottom"></param>
+    /// <param name="left"></param>
+    /// <param name="right"></param>
     public void UpdateLight(float[,] lightMap, float[] top, float[] bottom, float[] left, float[] right)
     {
         if (isAir) return;
@@ -644,21 +696,24 @@ public class ChunkManager : MonoBehaviour
 
         Rect rect = new Rect(1, 1, chunkSize, chunkSize);
         light2D.lightCookieSprite = Sprite.Create(lightTexture, rect, new(0, 0), 1);
-        //meshRenderer.material.SetTexture("_LightTex", lightTexture);
     }
 
     #endregion
 
-    #region CHUNK UPDATE
+    #region Chunk Update
 
     private bool isDirty = false; // Modification Flag
     public bool IsDirty => isDirty;
 
-    public void UpdateChunk()
+    public void UpdateChunk(bool isFront)
     {
-        GenerateMesh();
-        GenerateCollider();
+        if (!isFront)
+        {
+            GenerateCollider(); // if the block is on the backLayer it does not need to update his collisions.
+        }
+        GenerateMesh(isFront); //Mesh Update but only the layer that it needs.
     }
+
     public bool PlaceBlock(Vector2Int pos, int newBlock, bool isFront)
     {
         int current = isFront ? blocks[pos.x, pos.y] : backBlocks[pos.x, pos.y];
@@ -673,10 +728,15 @@ public class ChunkManager : MonoBehaviour
         else
             backBlocks[pos.x, pos.y] = newBlock;
 
-        UpdateChunk();
+        if(tileConfig.Tiles[newBlock].isSolid != tileConfig.Tiles[current].isSolid)
+        {
+            GenerateCollider();
+        }
+
+        GenerateMesh(isFront);
 
         if (tileConfig.Tiles[newBlock].isLightEmitter)
-            setLight(pos, tileConfig.Tiles[newBlock].lightData);
+            addLight(pos, tileConfig.Tiles[newBlock].lightData);
         else if (tileConfig.Tiles[current].isLightEmitter)
             deleteLight(pos);
 
@@ -688,7 +748,7 @@ public class ChunkManager : MonoBehaviour
     #region Interactions
     
     /// <summary>
-    /// Outside Script Interaction -- Get he block ID at local position
+    /// Outside Script Interaction -- Get his block ID at local position
     /// </summary>
     /// <param name="position"></param>
     /// <returns></returns>

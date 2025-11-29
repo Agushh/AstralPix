@@ -12,7 +12,7 @@ public class StatManager : MonoBehaviour
     [SerializeField] WorldManager worldManager;
     [SerializeField] PlayerScript playerManager;
     [SerializeField] WorldService worldService;
-    [SerializeField] TileConfig tileConfig;
+    TileConfig tileConfig;
     WorldMetaData WorldMetaData;
 
     [SerializeField] Color red;
@@ -29,6 +29,11 @@ public class StatManager : MonoBehaviour
     {
         string name;
         Color color;
+    }
+
+    private void Awake()
+    {
+        tileConfig = TileConfig.instance;
     }
 
     private void LateUpdate()

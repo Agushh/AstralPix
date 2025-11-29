@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using static UnityEditor.PlayerSettings;
 
-public class ChunkLightingManager : MonoBehaviour
+public class GlobalLightSystem : MonoBehaviour
 {
     const int chunkSize = 32;
 
@@ -15,16 +15,23 @@ public class ChunkLightingManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] WorldManager worldManager;
-    [SerializeField] TileConfig tileConfig;
-    Camera mainCamera; // Cache de la cámara
+    static TileConfig tileConfig;
 
     Dictionary<Vector2Int, ChunkManager> renderedChunksReferences = new();
 
-
     Queue<(Vector2Int pos, float color)> emitters = new();
+    
     Dictionary<Vector2Int, float[,]> lightMaps = new();
+    
     Queue<Vector2Int> bfsQueue = new();
+    
     HashSet<Vector2Int> chunksToRender = new();
+
+    private void Awake()
+    {
+        tileConfig = TileConfig.instance;
+    }
+
     public void UpdateLight(Vector2Int chunk)
     {
         HashSet<Vector2Int> chunkPos = new() { chunk };
@@ -44,7 +51,7 @@ public class ChunkLightingManager : MonoBehaviour
         chunksToRender.Clear();
         //Filtro doble ->
         // 1 - Debe estar Instanciado y In Game (renderedChunksReferences)
-        // 3 - Debe estar seleccionado (selectedChunks) Esto significa actualizar solo el necesario, o si es = null, actualizar todo sin tener que hacer uno por uno, y poder actualizar lotes.
+        // 2 - Debe estar seleccionado (selectedChunks) Esto significa actualizar solo el necesario, o si es = null, actualizar todo sin tener que hacer uno por uno, y poder actualizar lotes.
         foreach (Vector2Int pos in renderedChunksReferences.Keys)  
         {
             if (selectedChunks.Contains(pos))
@@ -111,7 +118,6 @@ public class ChunkLightingManager : MonoBehaviour
 
     }
 
-
     HashSet<Vector2Int> AddNeighbours(HashSet<Vector2Int> selectedChunks)
     {
         foreach(var chunkPos in selectedChunks.ToList())
@@ -136,12 +142,10 @@ public class ChunkLightingManager : MonoBehaviour
 
             if (!renderedChunksReferences.ContainsKey(pos)) continue;
 
+            //Paddings for texture bleeding
             float[] top = GetRow(pos + Vector2Int.up, 0);
-
             float[] bottom = GetRow(pos + Vector2Int.down, chunkSize - 1);
-
             float[] left = GetCol(pos + Vector2Int.left, chunkSize - 1);
-
             float[] right = GetCol(pos + Vector2Int.right, 0);
 
             //Se realiza este paso extra en vez de llamar directamente de renderedChunks para prevenir errores de sincronismo.

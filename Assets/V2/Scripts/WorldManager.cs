@@ -6,7 +6,7 @@ using UnityEngine;
 public class WorldManager : MonoBehaviour
 {
     [SerializeField] WorldService worldService;
-    [SerializeField] ChunkLightingManager lightingManager;
+    [SerializeField] GlobalLightSystem lightingManager;
     WorldMetaData worldMD;
 
     static int chunkSize = 32;
@@ -212,7 +212,7 @@ public class WorldManager : MonoBehaviour
     }
     #endregion
 
-    public void PlaceBlock(Vector2Int chunkPos, Vector2Int cursor, int newBlock, bool isFront)
+    public void PlaceBlock(Vector2Int chunkPos, Vector2Int newBlockPos, int newBlock, bool isFront)
     {
         if (!activeChunks.ContainsKey(chunkPos))
         {
@@ -220,35 +220,38 @@ public class WorldManager : MonoBehaviour
             return;
         }
         //Place block
-        activeChunks[chunkPos].PlaceBlock(cursor, newBlock, isFront);
+        activeChunks[chunkPos].PlaceBlock(newBlockPos, newBlock, isFront);
 
 
         lightingManager.UpdateLight(chunkPos);
 
+        
+
         //Update neighboring chunks if the interaction was on edge
-        if (cursor.x == 0)
+        if (newBlockPos.x == 0)
         {
             Vector2Int neigh = new(chunkPos.x - 1, chunkPos.y);
             activeChunks.TryGetValue(neigh, out var chunk);
-            if (chunk != null) activeChunks[neigh].UpdateChunk();
+            if (chunk != null) activeChunks[neigh].UpdateChunk(isFront);
         }
-        else if(cursor.x == chunkSize -1)
+        else if(newBlockPos.x == chunkSize -1)
         {
             Vector2Int neigh = new(chunkPos.x + 1, chunkPos.y);
             activeChunks.TryGetValue(neigh, out var chunk);
-            if (chunk != null) activeChunks[neigh].UpdateChunk();
+            if (chunk != null) activeChunks[neigh].UpdateChunk(isFront);
         }
-        if (cursor.y == 0)
+
+        if (newBlockPos.y == 0)
         {
             Vector2Int neigh = new(chunkPos.x , chunkPos.y - 1);
             activeChunks.TryGetValue(neigh, out var chunk);
-            if (chunk != null) activeChunks[neigh].UpdateChunk();
+            if (chunk != null) activeChunks[neigh].UpdateChunk(isFront);
         }
-        else if (cursor.y == chunkSize - 1)
+        else if (newBlockPos.y == chunkSize - 1)
         {
             Vector2Int neigh = new(chunkPos.x , chunkPos.y + 1);
             activeChunks.TryGetValue(neigh, out var chunk);
-            if (chunk != null) activeChunks[neigh].UpdateChunk();
+            if (chunk != null) activeChunks[neigh].UpdateChunk(isFront);
         }
     }
 

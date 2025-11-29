@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
@@ -39,7 +40,7 @@ public struct tile
 }
 
 [CreateAssetMenu(fileName = "TileConfig", menuName = "Scriptable Objects/TileConfig")]
-public class TileConfig : ScriptableObject
+public class TileConfig : ScriptableSingleton<TileConfig>
 {
     [Header("Texture Atlas")]
     [SerializeField]Texture2D commonTileTexture;
